@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/02 18:27:19 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:35:19 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 
 char	**ft_split(char const *s, char c);
 void	*free_split(char **aux, int words);
+size_t	wordcount(char const *s, int in, int i, char c);
 
 #endif

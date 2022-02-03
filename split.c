@@ -6,13 +6,13 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:20:17 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/02 18:27:11 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:25:04 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
 
-static size_t	wordcount(char const *s, int in, int i, char c)
+size_t	wordcount(char const *s, int in, int i, char c)
 {
 	while (s[in] != 0)
 	{

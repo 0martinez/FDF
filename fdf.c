@@ -6,12 +6,12 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/03 16:09:37 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:35:38 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-
+/*
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -85,9 +85,34 @@ int	main(void)
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }
+*/
 
+int	ft_atoi(const char *str)
+{
+	int	simb;
+	int	num;
+	int	i;
 
-/*
+	i = 0;
+	num = 0;
+	simb = 1;
+	while (str[i] != 0 && (str[i] == 32 || str[i] == '\t' || str[i] == '\n'
+			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			simb = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = (num * 10) + (str[i] - '0');
+		i++;
+	}
+	return (simb * num);
+}
+
 char	*copy_lane(char *line)
 {
 	char	*line_return;
@@ -137,14 +162,75 @@ char	**matrix_splited(char *line, char **char_matrix)
 	return (new_matrix);
 }
 
+int	check_if_jump(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != 0)
+	{
+		if (line[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*no_jump_line(char *line)
+{
+	char	*new_line;
+	int		i;
+
+	new_line = (char *) malloc(sizeof(char) * ft_strlen(line));
+	if (!new_line)
+		return (0);
+	i = 0;
+	while (line[i] != '\n')
+	{
+		new_line[i] = line[i];
+		i++;
+	}
+	new_line[i] = 0;
+	return (new_line);
+}
+
+int	*to_int_matrix(char *line)
+{
+	char	**char_matrix;
+	int		*to_return;
+	int		i;
+
+	i = 0;
+	char_matrix = ft_split(line, ' ');
+	if (!char_matrix)
+		return (0);
+	to_return = (int *) malloc(sizeof(int) * wordcount(line, 0, 0, ' '));
+	if (!to_return)
+		return (0);
+	while (char_matrix[i] != 0)
+	{
+		if (check_if_jump(char_matrix[i]) == 0)
+			to_return[i] = ft_atoi(char_matrix[i]);
+		else
+			to_return[i] = ft_atoi(no_jump_line(char_matrix[i]));
+		printf("%d", to_return[i]);
+		i++;
+	}
+	char_matrix = free_split(char_matrix, wordcount(line, 0, 0, ' '));
+	return (to_return);
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
 	int		fd;
+	int		j;
 	char	*line;
 	char	**char_matrix;
+	int		**int_matrix;
 
 	i = 0;
+	j = 0;
 	if (argc != 2)
 		return (0);
 	fd = open(argv[1], O_RDONLY);
@@ -152,12 +238,22 @@ int	main(int argc, char **argv)
 	while (line != 0)
 	{
 		char_matrix = matrix_splited(line, char_matrix);
-		printf("%s", char_matrix[i]);
 		if (!char_matrix)
 			return (0);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
+	int_matrix = (int **) malloc(sizeof(int *) * (i + 1));
+	if (!int_matrix)
+		return (0);
+	while (j < i)
+	{
+		int_matrix[j] = to_int_matrix(char_matrix[i]);
+		printf("ey ");
+		if (!int_matrix)
+			return (0);
+		j++;
+	}
 	return (0);
-}*/
+}
