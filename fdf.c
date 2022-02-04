@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/03 19:31:31 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:32:32 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ char	*copy_lane(char *line)
 	return (line_return);
 }
 
-char	**matrix_splited(char *line, char **char_matrix)
+char	**matrix_splited(char *line, char **char_matrix, t_fdf *fdf)
 {
 	char	**new_matrix;
 	int		i;
@@ -139,11 +139,13 @@ char	**matrix_splited(char *line, char **char_matrix)
 
 	i = 0;
 	j = 0;
+	fdf->width = 0;
 	if (!char_matrix)
 	{
 		new_matrix = (char **) malloc(sizeof(char *) * (i + 2));
 		new_matrix[i + 1] = 0;
 		new_matrix[i] = copy_lane(line);
+		fdf->height++;
 		return (new_matrix);
 	}
 	while (char_matrix[i] != 0)
@@ -156,9 +158,11 @@ char	**matrix_splited(char *line, char **char_matrix)
 	{
 		new_matrix[j] = copy_lane(char_matrix[j]);
 		j++;
+		fdf->width++;
 	}
 	new_matrix[i] = copy_lane(line);
 	char_matrix = free_split(char_matrix, i);
+	fdf->height++;
 	return (new_matrix);
 }
 
@@ -238,22 +242,31 @@ int	main(int argc, char **argv)
 	char	*line;
 	char	**char_matrix;
 	int		**int_matrix;
+	t_fdf	fdf;
 
 	i = 0;
 	j = 0;
+	fdf.height = 0;
+	fdf.width = 0;
 	if (argc != 2)
 		return (0);
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
 	while (line != 0)
 	{
-		char_matrix = matrix_splited(line, char_matrix);
+		char_matrix = matrix_splited(line, char_matrix, &fdf);
 		if (!char_matrix)
 			return (0);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
+	if (fdf.height != fdf.width)
+	{
+		printf("%d\n\n\n%d", fdf.height, fdf.width);
+		return (0);
+	}
+
 	int_matrix = (int **) malloc(sizeof(int *) * (i + 1));
 	if (!int_matrix)
 		return (0);
@@ -264,5 +277,6 @@ int	main(int argc, char **argv)
 			return (0);
 		j++;
 	}
+	printf("\n\n\n%d", fdf.height);
 	return (0);
 }
