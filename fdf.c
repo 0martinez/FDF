@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/04 19:32:32 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:40:56 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ char	*copy_lane(char *line)
 	return (line_return);
 }
 
-char	**matrix_splited(char *line, char **char_matrix, t_fdf *fdf)
+char	**matrix_splited(char *line, char **char_matrix)
 {
 	char	**new_matrix;
 	int		i;
@@ -139,13 +139,11 @@ char	**matrix_splited(char *line, char **char_matrix, t_fdf *fdf)
 
 	i = 0;
 	j = 0;
-	fdf->width = 0;
 	if (!char_matrix)
 	{
 		new_matrix = (char **) malloc(sizeof(char *) * (i + 2));
 		new_matrix[i + 1] = 0;
 		new_matrix[i] = copy_lane(line);
-		fdf->height++;
 		return (new_matrix);
 	}
 	while (char_matrix[i] != 0)
@@ -158,11 +156,9 @@ char	**matrix_splited(char *line, char **char_matrix, t_fdf *fdf)
 	{
 		new_matrix[j] = copy_lane(char_matrix[j]);
 		j++;
-		fdf->width++;
 	}
 	new_matrix[i] = copy_lane(line);
 	char_matrix = free_split(char_matrix, i);
-	fdf->height++;
 	return (new_matrix);
 }
 
@@ -198,7 +194,7 @@ char	*no_jump_line(char *line)
 	return (new_line);
 }
 
-int	*to_int_matrix(char *line)
+int	*to_int_matrix(char *line, t_fdf *fdf)
 {
 	char	**char_matrix;
 	int		*to_return;
@@ -208,13 +204,17 @@ int	*to_int_matrix(char *line)
 	char_matrix = ft_split(line, ' ');
 	if (!char_matrix)
 		return (0);
-	if (char_matrix[wordcount(line, 0, 0, ' ') - 1][0] == '\n')
+	if (char_matrix[wordcount(line, ' ') - 1][0] == '\n')
 	{
-		to_return = malloc(sizeof(int) * wordcount(line, 0, 0, ' ') - 1);
-		char_matrix[wordcount(line, 0, 0, ' ') - 1] = 0;
+		fdf->width = wordcount(line, ' ') - 1;
+		to_return = malloc(sizeof(int) * wordcount(line, ' ') - 1);
+		char_matrix[wordcount(line, ' ') - 1] = 0;
 	}
 	else
-		to_return = (int *) malloc(sizeof(int) * wordcount(line, 0, 0, ' '));
+	{
+		to_return = (int *) malloc(sizeof(int) * wordcount(line, ' '));
+		fdf->width = wordcount(line, ' ');
+	}
 	if (!to_return)
 		return (0);
 	while (char_matrix[i] != 0)
@@ -230,7 +230,7 @@ int	*to_int_matrix(char *line)
 		i++;
 	}
 	printf("\n");
-	char_matrix = free_split(char_matrix, wordcount(line, 0, 0, ' '));
+	char_matrix = free_split(char_matrix, wordcount(line, ' '));
 	return (to_return);
 }
 
@@ -240,8 +240,7 @@ int	main(int argc, char **argv)
 	int		fd;
 	int		j;
 	char	*line;
-	char	**char_matrix;
-	int		**int_matrix;
+	int		aux_width;
 	t_fdf	fdf;
 
 	i = 0;
@@ -252,31 +251,67 @@ int	main(int argc, char **argv)
 		return (0);
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
+	if (!line)
+		return (0);
 	while (line != 0)
 	{
-		char_matrix = matrix_splited(line, char_matrix, &fdf);
-		if (!char_matrix)
+		fdf.char_matrix = matrix_splited(line, fdf.char_matrix);
+		fdf.height++;
+		if (!fdf.char_matrix)
 			return (0);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
-	if (fdf.height != fdf.width)
-	{
-		printf("%d\n\n\n%d", fdf.height, fdf.width);
+	fdf.int_matrix = (int **) malloc(sizeof(int *) * (i + 1));
+	if (!fdf.int_matrix)
 		return (0);
-	}
-
-	int_matrix = (int **) malloc(sizeof(int *) * (i + 1));
-	if (!int_matrix)
+	fdf.int_matrix[j] = to_int_matrix(fdf.char_matrix[j], &fdf);
+	if (!fdf.int_matrix[j])
 		return (0);
+	aux_width = fdf.width;
+	j++;
 	while (j < i)
 	{
-		int_matrix[j] = to_int_matrix(char_matrix[j]);
-		if (!int_matrix)
+		fdf.int_matrix[j] = to_int_matrix(fdf.char_matrix[j], &fdf);
+		if (!fdf.int_matrix[j])
 			return (0);
+		if (aux_width != fdf.width)
+		{
+			printf("map error");
+			return (0);
+		}
 		j++;
 	}
-	printf("\n\n\n%d", fdf.height);
+	fdf.mlx_ptr = mlx_init();
+	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1000, 1000, "first_try");
+	fdf.zoom = 20;
+	j = 0;
+	i = 0;
+	while (j < fdf.height)
+	{
+		i = 0;
+		while (i < fdf.width)
+		{
+			if (i < fdf.width - 1)
+				print_bresenham(i, j, i + 1, j, &fdf);
+			if (j < fdf.height - 1)
+				print_bresenham(i, j, i, j + 1, &fdf);
+			i++;
+		}
+		j++;
+	}
+	/*while (j < fdf.height)
+	{
+		i = 0;
+		while (i < fdf.width)
+		{
+			printf("%d", fdf.int_matrix[j][i]);
+			i++;
+		}
+		printf("\n");
+		j++;
+	}*/
+	mlx_loop(fdf.mlx_ptr);
 	return (0);
 }

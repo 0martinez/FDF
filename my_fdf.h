@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/04 19:14:28 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:02:18 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@ typedef struct s_fdf
 
 	int		width;
 	int		height;
+	int		zoom;
+	int		**int_matrix;
+	char	**char_matrix;
 }	t_fdf;
 
 
 char	**ft_split(char const *s, char c);
 void	*free_split(char **aux, int words);
-size_t	wordcount(char const *s, int in, int i, char c);
+size_t	wordcount(char const *s, char c);
+
+void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf);
 
 #endif

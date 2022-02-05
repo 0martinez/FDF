@@ -6,7 +6,7 @@
 #    By: omartine <omartine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 13:26:33 by omartine          #+#    #+#              #
-#    Updated: 2022/02/03 18:22:50 by omartine         ###   ########.fr        #
+#    Updated: 2022/02/05 18:26:37 by omartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= fdf
 LIB_MLX		= libmlx.dylib
 
 SRCS =		fdf.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-			split.c
+			split.c bresenham.c
 
 OBJS		= $(SRCS:.c=.o)
 

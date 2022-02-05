@@ -6,26 +6,31 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:20:17 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/03 19:02:34 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/05 17:35:04 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
 
-size_t	wordcount(char const *s, int in, int i, char c)
+size_t	wordcount(char const *s, char c)
 {
-	while (s[in] != 0)
+	int	i;
+	int	words;
+
+	i = 0;
+	words = 0;
+	while (s[i] != 0)
 	{
-		if (s[in] == c)
-			in++;
+		if (s[i] == c)
+			i++;
 		else
 		{
-			i++;
-			while (s[in] != c && s[in] != 0)
-				in++;
+			words++;
+			while (s[i] != c && s[i] != 0)
+				i++;
 		}
 	}
-	return (i);
+	return (words);
 }
 
 static int	position(char const *s, int pos, char c, int flg)
@@ -85,7 +90,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	if (!s)
 		return (0);
-	count = wordcount(s, in, i, c);
+	count = wordcount(s, c);
 	aux = (char **) malloc(sizeof(char *) * (count + 1));
 	if (!aux)
 		return (0);
