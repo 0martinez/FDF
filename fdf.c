@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/05 19:40:56 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:25:30 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,7 +285,7 @@ int	main(int argc, char **argv)
 	}
 	fdf.mlx_ptr = mlx_init();
 	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1000, 1000, "first_try");
-	fdf.zoom = 20;
+	fdf.zoom = 50;
 	j = 0;
 	i = 0;
 	while (j < fdf.height)
@@ -301,17 +301,6 @@ int	main(int argc, char **argv)
 		}
 		j++;
 	}
-	/*while (j < fdf.height)
-	{
-		i = 0;
-		while (i < fdf.width)
-		{
-			printf("%d", fdf.int_matrix[j][i]);
-			i++;
-		}
-		printf("\n");
-		j++;
-	}*/
 	mlx_loop(fdf.mlx_ptr);
 	return (0);
 }
