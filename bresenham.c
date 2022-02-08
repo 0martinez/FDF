@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/07 18:29:44 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:21:20 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	maxx(float x, float y)
 
 void	isometric(float *x, float *y, int z)
 {
-	*x = (*x - *y) * cos(0.8);
-	*y = (*x + *y) * sin(0.8) - z;
+	*x = (*x - *y) * cos(1);
+	*y = (*x + *y) * sin(1) - z;
 }
 
 void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
@@ -48,7 +48,6 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	x2 = x2 * fdf->zoom;
 	y2 = y2 * fdf->zoom;
 
-
 	isometric(&x, &y, z);
 	isometric(&x2, &y2, z2);
 	x_step = x2 - x;
@@ -56,20 +55,20 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	max = maxx(mod(x_step), mod(y_step));
 	x_step /= max;
 	y_step /= max;
-	x += 300;
-	y += 300;
-	x2 += 300;
-	y2 += 300;
-	printf("---\n");
+	x += 500;
+	y += 200;
+	x2 += 500;
+	y2 += 200;
+	//printf("---\n");
 	while ((int )(x - x2) || (int )(y - y2))
 	{
-		printf("<%f><%f>\n", x, y);
-		printf("<%f><%f>\n", x_step, y_step);
-		printf("<%d><%d>\n", (int)(x - x2), (int)(y - y2));
+		//printf("<%f><%f>\n", x, y);
+		//printf("<%f><%f>\n", x_step, y_step);
+		//printf("<%d><%d>\n", (int)(x - x2), (int)(y - y2));
 		if (z != 0 || z2 != 0)
 			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0x00ff00);
 		else
-			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0xff0000);
+			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0xff00ff);
 		x += x_step;
 		y += y_step;
 	}

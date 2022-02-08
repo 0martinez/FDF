@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:54:12 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/07 15:57:08 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:05:03 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,33 @@ int	main(void)
 	printf("(%f)---(%f)---(%f)", x, y, z);
 	return (0);
 }*/
+
+int	ft_atoi(const char *str, t_stack_gen *st)
+{
+	int		simb;
+	long	num;
+	int		i;
+
+	i = 0;
+	num = 0;
+	simb = 1;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			simb = -1;
+		i++;
+		if (str[i] == 0)
+		{
+			st->error = 2;
+			return (0);
+		}
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+		num = (num * 10) + (str[i++] - '0');
+	if (str[i] != 0 || num * simb > 2147483647 || num * simb < -2147483648)
+		st->error = 2;
+	return ((int )num * simb);
+}
 
 int main(void)
 {
