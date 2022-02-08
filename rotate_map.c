@@ -6,13 +6,13 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 17:15:00 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/08 17:37:59 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:58:50 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
 
-void	rotate_matrix(int **int_matrix, t_fdf *fdf)
+void	rotate_matrix(t_fdf *fdf)
 {
 	int	row;
 	int	height;
