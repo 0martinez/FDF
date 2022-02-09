@@ -6,12 +6,12 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 17:15:00 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/08 18:58:50 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:53:05 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-
+/*
 void	rotate_matrix(t_fdf *fdf)
 {
 	int	row;
@@ -74,4 +74,41 @@ void	rotate_matrix(t_fdf *fdf)
 		}
 		col++;
 	}
+}*/
+
+int	**rotate_matrix__90(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+	int	**new_matrix;
+
+	new_matrix = (int **) malloc(sizeof(int *) * (fdf->width));
+	if (!new_matrix)
+		return (0);
+	i = 0;
+	while (i < fdf->width)
+	{
+		new_matrix[i] = (int *) malloc(sizeof(int) * (fdf->height));
+		i++;
+	}
+	i = 0;
+	j = 0;
+	while (i < fdf->width)
+	{
+		j = 0;
+		while (j < fdf->height)
+		{
+			new_matrix[j][fdf->height - 1 - i] = fdf->int_matrix[i][j];
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < fdf->height)
+	{
+		free(fdf->int_matrix[i]);
+		i++;
+	}
+	free(fdf->int_matrix);
+	return (new_matrix);
 }
