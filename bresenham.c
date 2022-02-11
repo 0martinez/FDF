@@ -6,11 +6,20 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/08 17:21:20 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:47:20 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
+
+/*
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}*/
 
 float	mod(float i)
 {
@@ -47,7 +56,6 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	y = y * fdf->zoom;
 	x2 = x2 * fdf->zoom;
 	y2 = y2 * fdf->zoom;
-
 	isometric(&x, &y, z);
 	isometric(&x2, &y2, z2);
 	x_step = x2 - x;
@@ -59,12 +67,8 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	y += 200;
 	x2 += 500;
 	y2 += 200;
-	//printf("---\n");
 	while ((int )(x - x2) || (int )(y - y2))
 	{
-		//printf("<%f><%f>\n", x, y);
-		//printf("<%f><%f>\n", x_step, y_step);
-		//printf("<%d><%d>\n", (int)(x - x2), (int)(y - y2));
 		if (z != 0 || z2 != 0)
 			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0x00ff00);
 		else

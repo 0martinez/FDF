@@ -6,12 +6,14 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:54:12 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/08 17:05:03 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:44:14 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 /*
 int main(void)
@@ -50,37 +52,83 @@ int	main(void)
 	printf("(%f)---(%f)---(%f)", x, y, z);
 	return (0);
 }*/
-
-int	ft_atoi(const char *str, t_stack_gen *st)
+int	ft_strlen(char	*str)
 {
-	int		simb;
-	long	num;
-	int		i;
+	int	i = 0;
+	while (str[i] != 0)
+		i++;
+	return (i);
+}
+static char	to_char(unsigned long long num, int flg)
+{
+	char	hexa;
+
+	if (num > 9)
+	{
+		if (flg == 1)
+			hexa = 'A' + (num - 10);
+		else
+			hexa = 'a' + (num - 10);
+	}
+	else
+		hexa = '0' + num;
+	return (hexa);
+}
+
+static int	count_chars(unsigned long long num)
+{
+	int	i;
 
 	i = 0;
-	num = 0;
-	simb = 1;
-	if (str[i] == '-' || str[i] == '+')
+	while (num != 0)
 	{
-		if (str[i] == '-')
-			simb = -1;
+		num = num / 16;
 		i++;
-		if (str[i] == 0)
-		{
-			st->error = 2;
-			return (0);
-		}
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-		num = (num * 10) + (str[i++] - '0');
-	if (str[i] != 0 || num * simb > 2147483647 || num * simb < -2147483648)
-		st->error = 2;
-	return ((int )num * simb);
+	return (i);
+}
+
+static int	run_reverse(int count, char *str)
+{
+	count--;
+	while (count >= 0)
+	{
+		write(1, &str[count], 1);
+		count--;
+	}
+	return (ft_strlen(str));
+}
+
+
+
+int	ft_hexa(unsigned long int a, int flg)
+{
+	int		count;
+	char	*str;
+	int		i;
+	unsigned long long num = a;
+	i = 0;
+	if (num == 0)
+		return (1);
+	count = count_chars(num);
+	str = (char *) malloc(sizeof(char) * count + 1);
+	if (!str)
+		return (0);
+	str[count] = 0;
+	while (num != 0)
+	{
+		str[i] = to_char(num % 16, flg);
+		num = num / 16;
+		i++;
+	}
+	count = run_reverse(count, str);
+	free(str);
+	return (count);
 }
 
 int main(void)
 {
-	float x = cos(0.8);
-	printf("%f", x);
+	int a = 0x00ff00;
+	ft_hexa(a, 0);
 	return (0);
 }

@@ -6,12 +6,12 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:55:06 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/07 15:00:47 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:47:52 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-
+/*
 char	*management_color(char *str)
 {
 	int		i;
@@ -90,4 +90,4 @@ char	*get_color(int j, int i, t_fdf *fdf)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-}
+}*/
