@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/09 13:54:52 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/12 19:54:42 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ size_t	wordcount(char const *s, char c);
 
 void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf);
 
-char	*get_color(int j, int i, t_fdf *fdf);
+int		get_color(int j, int i, t_fdf *fdf);
 
 int		**rotate_matrix__90(t_fdf *fdf);
+
+int		hex_to_dec(char *str);
 
 #endif

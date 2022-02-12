@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/11 15:16:18 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/12 20:12:01 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,8 @@ int	*to_int_matrix(char *line, t_fdf *fdf)
 			if (char_matrix[i][0] != '\n')
 				to_return[i] = ft_atoi(no_jump_line(char_matrix[i]));
 		}
-		//printf("%d ", to_return[i]);
 		i++;
 	}
-	//printf("\n");
 	char_matrix = free_split(char_matrix, wordcount(line, ' '));
 	return (to_return);
 }
@@ -211,7 +209,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	fdf.mlx_ptr = mlx_init();
 	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1000, 1000, "first_try");
-	fdf.zoom = 5;
+	fdf.zoom = 2;
 	j = 0;
 	i = 0;
 	while (j < fdf.height)

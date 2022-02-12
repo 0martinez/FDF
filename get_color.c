@@ -6,12 +6,12 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:55:06 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/11 17:47:52 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/12 20:11:43 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-/*
+
 char	*management_color(char *str)
 {
 	int		i;
@@ -53,6 +53,7 @@ char	*no_color(void)
 
 	color = malloc(sizeof(char) * (8 + 1));
 	if (!color)
+		return (0);
 	color[0] = '0';
 	color[1] = 'x';
 	color[2] = '0';
@@ -65,7 +66,29 @@ char	*no_color(void)
 	return (color);
 }
 
-char	*get_color(int j, int i, t_fdf *fdf)
+int	hex_to_dec(char *str)
+{
+	int	l;
+	int	dec;
+	int	base;
+
+	l = ft_strlen(str);
+	base = 1;
+	dec = 0;
+	while (l-- > 0)
+	{
+		if (str[l] >= '0' && str[l] <= '9')
+			dec += (str[l] - 48) * base;
+		else if (str[l] >= 'A' && str[l] <= 'F')
+			dec += (str[l] - 55) * base;
+		else if (str[l] >= 'a' && str[l] <= 'f')
+			dec += (str[l] - 87) * base;
+		base *= 16;
+	}
+	return (dec);
+}
+
+int	get_color(int j, int i, t_fdf *fdf)
 {
 	char	*str_color;
 	char	*color;
@@ -74,20 +97,11 @@ char	*get_color(int j, int i, t_fdf *fdf)
 	if (!str_color)
 		return (0);
 	if (wordcount(str_color, ',') == 2)
-	{
 		color = management_color(str_color);
-		if (!color)
-			return (0);
-		return (color);
-	}
-	else if (wordcount(str_color, ',') == 1)
-	{
-		color = no_color();
-		return (color);
-	}
 	else
-	{
-		write(1, "Error\n", 6);
-		return (0);
-	}
-}*/
+		return (0xffffff);
+	return (hex_to_dec(color));
+	//check if its an unvalid color
+}
+
+

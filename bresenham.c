@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/11 17:47:20 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/12 20:14:23 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	int		max;
 	int		z;
 	int		z2;
-	//char	*color;
+	int		color;
 
+	color = get_color(x, y, fdf);
 	z = fdf->int_matrix[(int)y][(int)x];
 	z2 = fdf->int_matrix[(int)y2][(int)x2];
 	x = x * fdf->zoom;
@@ -69,10 +70,11 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	y2 += 200;
 	while ((int )(x - x2) || (int )(y - y2))
 	{
-		if (z != 0 || z2 != 0)
+		/*if (z != 0 || z2 != 0)
 			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0x00ff00);
 		else
-			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0xff00ff);
+			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0xff00ff);*/
+		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, color);
 		x += x_step;
 		y += y_step;
 	}
