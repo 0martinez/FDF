@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/12 20:14:23 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/15 13:36:36 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	int		z2;
 	int		color;
 
-	color = get_color(x, y, fdf);
+	color = get_color(y, x, fdf);
 	z = fdf->int_matrix[(int)y][(int)x];
 	z2 = fdf->int_matrix[(int)y2][(int)x2];
 	x = x * fdf->zoom;
