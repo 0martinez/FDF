@@ -6,37 +6,11 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/15 13:38:10 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:53:11 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-
-int	ft_atoi(const char *str)
-{
-	int	simb;
-	int	num;
-	int	i;
-
-	i = 0;
-	num = 0;
-	simb = 1;
-	while (str[i] != 0 && (str[i] == 32 || str[i] == '\t' || str[i] == '\n'
-			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			simb = -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = (num * 10) + (str[i] - '0');
-		i++;
-	}
-	return (simb * num);
-}
 
 char	*copy_lane(char *line)
 {
@@ -157,6 +131,18 @@ int	*to_int_matrix(char *line, t_fdf *fdf)
 	return (to_return);
 }
 
+struct s_fdf	init_struct(void)
+{
+	t_fdf	fdf;
+
+	fdf.height = 0;
+	fdf.width = 0;
+	fdf.mlx_ptr = mlx_init();
+	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1000, 1000, "first_try");
+	fdf.zoom = 25;
+	return (fdf);
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -168,10 +154,11 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	j = 0;
-	fdf.height = 0;
-	fdf.width = 0;
+	fdf = init_struct();
 	if (argc != 2)
 		return (0);
+
+
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
 	if (!line)
@@ -206,10 +193,6 @@ int	main(int argc, char **argv)
 		}
 		j++;
 	}
-	i = 0;
-	fdf.mlx_ptr = mlx_init();
-	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1000, 1000, "first_try");
-	fdf.zoom = 2;
 	j = 0;
 	i = 0;
 	while (j < fdf.height)

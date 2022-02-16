@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/15 13:36:36 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:38:56 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	maxx(float x, float y)
 
 void	isometric(float *x, float *y, int z)
 {
-	*x = (*x - *y) * cos(1);
-	*y = (*x + *y) * sin(1) - z;
+	*x = ((*x - *y) * cos(1)) * -2;
+	*y = ((*x + *y) * sin(1) - z) * -2;
 }
 
 void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
