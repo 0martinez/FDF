@@ -6,7 +6,7 @@
 #    By: omartine <omartine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 13:26:33 by omartine          #+#    #+#              #
-#    Updated: 2022/02/08 19:00:00 by omartine         ###   ########.fr        #
+#    Updated: 2022/02/17 17:24:17 by omartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME		= fdf
 LIB_MLX		= libmlx.dylib
 
 SRCS =		fdf.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-			split.c bresenham.c get_color.c rotate_map.c
+			split.c bresenham.c get_color.c rotate_map.c utils/ft_atoi.c \
+			get_matrix/get_char_matrix.c get_matrix/get_int_matrix.c
 
 OBJS		= $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:46:04 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/16 13:55:22 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/17 17:07:32 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,14 @@ char	*copy_lane(char *line)
 	return (line_return);
 }
 
-char	**char_matrix_management(t_fdf fdf, char **argv)
+char	**first_matrix_split(char *line, int i)
 {
-	char	*line;
-	int		fd;
+	char	**new_matrix;
 
-	fd = open(argv[1], O_RDONLY);
-	line = get_next_line(fd);
-	if (!line)
-		return (0);
-	while (line != 0)
-	{
-		fdf.char_matrix = matrix_splited(line, fdf.char_matrix);
-		fdf.height++;
-		if (!fdf.char_matrix)
-			return (0);
-		free(line);
-		line = get_next_line(fd);
-		i++;
-	}
+	new_matrix = (char **) malloc(sizeof(char *) * (i + 2));
+	new_matrix[i + 1] = 0;
+	new_matrix[i] = copy_lane(line);
+	return (new_matrix);
 }
 
 char	**matrix_splited(char *line, char **char_matrix)
@@ -61,9 +50,7 @@ char	**matrix_splited(char *line, char **char_matrix)
 	j = 0;
 	if (!char_matrix)
 	{
-		new_matrix = (char **) malloc(sizeof(char *) * (i + 2));
-		new_matrix[i + 1] = 0;
-		new_matrix[i] = copy_lane(line);
+		new_matrix = first_matrix_split(line, i);
 		return (new_matrix);
 	}
 	while (char_matrix[i] != 0)
@@ -80,4 +67,29 @@ char	**matrix_splited(char *line, char **char_matrix)
 	new_matrix[i] = copy_lane(line);
 	char_matrix = free_split(char_matrix, i);
 	return (new_matrix);
+}
+
+struct s_fdf	get_char_matrix(t_fdf fdf, char *str, int *i)
+{
+	int		fd;
+	char	*line;
+	int		j;
+
+	j = 0;
+	fd = open(str, O_RDONLY);
+	line = get_next_line(fd);
+	if (!line)
+		return (fdf);
+	while (line != 0)
+	{
+		fdf.char_matrix = matrix_splited(line, fdf.char_matrix);
+		fdf.height++;
+		if (!fdf.char_matrix)
+			return (fdf);
+		free(line);
+		line = get_next_line(fd);
+		j++;
+	}
+	*i = j;
+	return (fdf);
 }
