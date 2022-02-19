@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/17 17:04:19 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:50:08 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,37 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	int		z;
 	int		z2;
 	int		color;
+	//float	angle;
+
+
 
 	color = get_color(y, x, fdf);
 	z = fdf->int_matrix[(int)y][(int)x];
 	z2 = fdf->int_matrix[(int)y2][(int)x2];
+
+
 	x = x * fdf->zoom;
 	y = y * fdf->zoom;
 	x2 = x2 * fdf->zoom;
 	y2 = y2 * fdf->zoom;
+
+	//angle = 90;
+	//x = x * cos(angle) - y * sin(angle);
+	//y = x * sin(angle) + y * cos(angle);
+	//x2 = x2 * cos(angle) - y2 * sin(angle);
+	//y2 = x2 * sin(angle) + y2 * cos(angle);
+
+
 	isometric(&x, &y, z);
 	isometric(&x2, &y2, z2);
+
+
 	x_step = x2 - x;
 	y_step = y2 - y;
 	max = maxx(mod(x_step), mod(y_step));
 	x_step /= max;
 	y_step /= max;
+
 	x += 500;
 	y += 200;
 	x2 += 500;

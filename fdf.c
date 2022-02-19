@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/19 14:01:16 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:44:12 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	fdf = get_char_matrix(fdf, argv[1], &i);
-	fdf.int_matrix = (int **) malloc(sizeof(int *) * (i + 1));
+	fdf.int_matrix = (int **) malloc(sizeof(int *) * (i));
 	if (!fdf.int_matrix)
 		return (0);
 	fdf.int_matrix[j] = to_int_matrix(fdf.char_matrix[j], &fdf);
