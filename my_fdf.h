@@ -26,9 +26,13 @@ typedef struct s_fdf
 
 	int		width;
 	int		height;
+	int		move_x;
+	int		move_y;
 	int		zoom;
+	int		perspective;
 	int		**int_matrix;
 	char	**char_matrix;
+	int		error;
 }	t_fdf;
 
 char			**ft_split(char const *s, char c);

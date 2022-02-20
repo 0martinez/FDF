@@ -69,9 +69,11 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	//x2 = x2 * cos(angle) - y2 * sin(angle);
 	//y2 = x2 * sin(angle) + y2 * cos(angle);
 
-
-	isometric(&x, &y, z);
-	isometric(&x2, &y2, z2);
+	if (fdf->perspective == 0)
+	{
+		isometric(&x, &y, z);
+		isometric(&x2, &y2, z2);
+	}
 
 
 	x_step = x2 - x;

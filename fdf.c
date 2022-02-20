@@ -12,6 +12,55 @@
 
 #include "my_fdf.h"
 
+void	draw_matrix(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	while (j < fdf->height)
+	{
+		i = 0;
+		while (i < fdf->width)
+		{
+			if (i < fdf->width - 1)
+				print_bresenham(i, j, i + 1, j, fdf);
+			if (j < fdf->height - 1)
+				print_bresenham(i, j, i, j + 1, fdf);
+			i++;
+		}
+		j++;
+	}
+}
+
+int	key_handle(int key, t_fdf *fdf)
+{
+	if (key == 126)
+		fdf->move_y -= 10;
+	if (key == 125)
+		fdf->move_y += 10;
+	if (key == 124)
+		fdf->move_x += 10;
+	if (key == 123)
+		fdf->move_y -= 10;
+	if (key == '+')
+		fdf->zoom += 2;
+	if (key == '-')
+		fdf->zoom -= 2;
+	if (key == "change perspective")
+	{
+		if (fdf->perspective == 0)
+			fdf->perspective = 1;
+		else
+			fdf->perspective = 0;
+	}
+	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
+	draw_matrix(fdf);
+	return (0);
+	
+}
+
 int	check_if_jump(char *line)
 {
 	int	i;
@@ -88,9 +137,11 @@ struct s_fdf	init_struct(void)
 
 	fdf.height = 0;
 	fdf.width = 0;
+	fdf.error = 0;
 	fdf.mlx_ptr = mlx_init();
 	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1000, 1000, "first_try");
 	fdf.zoom = 5;
+	fdf.perspective = 0;
 	return (fdf);
 }
 
@@ -130,21 +181,8 @@ int	main(int argc, char **argv)
 	//fdf.int_matrix = rotate_matrix__90(&fdf);
 	//fdf.int_matrix = rotate_matrix__90(&fdf);
 	//fdf.int_matrix = rotate_matrix__90(&fdf);
-	j = 0;
-	i = 0;
-	while (j < fdf.height)
-	{
-		i = 0;
-		while (i < fdf.width)
-		{
-			if (i < fdf.width - 1)
-				print_bresenham(i, j, i + 1, j, &fdf);
-			if (j < fdf.height - 1)
-				print_bresenham(i, j, i, j + 1, &fdf);
-			i++;
-		}
-		j++;
-	}
+	draw_matrix(&fdf);
+	mlx_key_hook(fdf.win_ptr, key_handle, &fdf);
 	mlx_loop(fdf.mlx_ptr);
 	return (0);
 }
