@@ -6,11 +6,11 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:55:06 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/15 13:35:25 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:17:48 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_fdf.h"
+#include "../my_fdf.h"
 
 int	hex_to_dec(char *str)
 {
@@ -67,4 +67,38 @@ int	get_color(int j, int i, t_fdf *fdf)
 		len++;
 	free_split(split, len);
 	return (color);
+}
+
+int	*get_color_pointer(t_fdf *fdf, int j)
+{
+	int	*color_str;
+	int	i;
+
+	color_str = (int *) malloc(sizeof(int) * fdf->width);
+	if (!color_str)
+		return (0);
+	i = 0;
+	while (i < fdf->width)
+	{
+		color_str[i] = get_color(j, i, fdf);
+		//printf("%d ", color_str[i]);
+		i++;
+	}
+	//getchar();
+	return (color_str);
+}
+
+void	get_color_matrix(t_fdf *fdf)
+{
+	int	j;
+
+	j = 0;
+	fdf->color_matrix = (int **) malloc(sizeof(int *) * fdf->height);
+	if (!fdf->color_matrix)
+		return ;
+	while (j < fdf->height)
+	{
+		fdf->color_matrix[j] = get_color_pointer(fdf, j);
+		j++;
+	}
 }

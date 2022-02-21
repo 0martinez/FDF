@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 17:29:18 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:00:05 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_fdf
 	float			angle;
 	int				**int_matrix;
 	char			**char_matrix;
+	int				**color_matrix;
 	int				move_x;
 	int				move_y;
 	int				perspective;
@@ -63,5 +64,6 @@ int				ft_atoi(const char *str);
 void			get_maps(t_fdf *fdf, char *str);
 void			get_char_matrix(t_fdf *fdf, char *str, int *i);
 void			get_int_matrix(t_fdf *fdf, int i);
+void			get_color_matrix(t_fdf *fdf);
 
 #endif
