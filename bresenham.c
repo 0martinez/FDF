@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 12:58:03 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:00:59 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,20 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 
 
 
-	color = get_color(y, x, fdf);
+	if (fdf->palette == 0)
+		color = get_color(y, x, fdf);
+	if (fdf->palette == 1)
+		color = 0x00ff00;
 	z = fdf->int_matrix[(int)y][(int)x];
 	z2 = fdf->int_matrix[(int)y2][(int)x2];
-
+	z = z * fdf->z_escalar;
+	z2 = z2 * fdf->z_escalar;
 
 	x = x * fdf->zoom;
 	y = y * fdf->zoom;
 	x2 = x2 * fdf->zoom;
 	y2 = y2 * fdf->zoom;
 
-	//angle = 90;
-	//x = x * cos(angle) - y * sin(angle);
-	//y = x * sin(angle) + y * cos(angle);
-	//x2 = x2 * cos(angle) - y2 * sin(angle);
-	//y2 = x2 * sin(angle) + y2 * cos(angle);
 	if (fdf->perspective == 0)
 	{
 		isometric(&x, &y, z);
@@ -84,12 +83,18 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	y = y + fdf->move_y;
 	x2 = x2 + fdf->move_x;
 	y2 = y2 + fdf->move_y;
+	/*
+	if (fdf->rotation == ON)
+	{
+
+		x = x + fdf->x_rot;
+		y = y + fdf->y_rot;
+		z = z + fdf->rotate;
+	}
+	*/
+	//mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 20, 0x00ff00, "hola");
 	while ((int )(x - x2) || (int )(y - y2))
 	{
-		/*if (z != 0 || z2 != 0)
-			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0x00ff00);
-		else
-			mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, 0xff00ff);*/
 		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, color);
 		x += x_step;
 		y += y_step;

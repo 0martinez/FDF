@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 13:17:17 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:29:18 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <math.h>
 # include "get_next_line/get_next_line.h"
 
+# define ON 1
+# define OFF 0
+
 typedef struct s_fdf
 {
 	void			*mlx_ptr;
@@ -26,12 +29,20 @@ typedef struct s_fdf
 
 	int				width;
 	int				height;
-	int				zoom;
+	float			zoom;
+	float			angle;
 	int				**int_matrix;
 	char			**char_matrix;
 	int				move_x;
 	int				move_y;
 	int				perspective;
+	int				axe;
+	int				rotation;
+	float			x_rot;
+	float			y_rot;
+	int				z_rot;
+	float			z_escalar;
+	int				palette;
 
 }	t_fdf;
 
@@ -49,6 +60,7 @@ int				hex_to_dec(char *str);
 
 int				ft_atoi(const char *str);
 
+void			get_maps(t_fdf *fdf, char *str);
 void			get_char_matrix(t_fdf *fdf, char *str, int *i);
 void			get_int_matrix(t_fdf *fdf, int i);
 
