@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:46:04 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/17 17:07:32 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/21 12:49:39 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**matrix_splited(char *line, char **char_matrix)
 	return (new_matrix);
 }
 
-struct s_fdf	get_char_matrix(t_fdf fdf, char *str, int *i)
+void	get_char_matrix(t_fdf *fdf, char *str, int *i)
 {
 	int		fd;
 	char	*line;
@@ -79,17 +79,17 @@ struct s_fdf	get_char_matrix(t_fdf fdf, char *str, int *i)
 	fd = open(str, O_RDONLY);
 	line = get_next_line(fd);
 	if (!line)
-		return (fdf);
+		return ;
 	while (line != 0)
 	{
-		fdf.char_matrix = matrix_splited(line, fdf.char_matrix);
-		fdf.height++;
-		if (!fdf.char_matrix)
-			return (fdf);
+		fdf->char_matrix = matrix_splited(line, fdf->char_matrix);
+		fdf->height++;
+		if (!fdf->char_matrix)
+			return ;
 		free(line);
 		line = get_next_line(fd);
 		j++;
 	}
 	*i = j;
-	return (fdf);
+	return ;
 }

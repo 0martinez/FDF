@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:41:21 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/17 17:23:56 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:17:21 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,30 @@ int	*to_int_matrix(char *line, t_fdf *fdf)
 	return (to_return);
 }
 
-struct s_fdf	get_int_matrix(t_fdf fdf, int i)
+void	get_int_matrix(t_fdf *fdf, int i)
 {
 	int	aux_width;
 	int	j;
 
 	j = 0;
-	fdf.int_matrix = (int **) malloc(sizeof(int *) * (i + 1));
-	if (!fdf.int_matrix)
-		return (fdf);
-	fdf.int_matrix[j] = to_int_matrix(fdf.char_matrix[j], &fdf);
-	if (!fdf.int_matrix[j])
-		return (fdf);
-	aux_width = fdf.width;
+	fdf->int_matrix = (int **) malloc(sizeof(int *) * (i + 1));
+	if (!fdf->int_matrix)
+		return ;
+	fdf->int_matrix[j] = to_int_matrix(fdf->char_matrix[j], fdf);
+	if (!fdf->int_matrix[j])
+		return ;
+	aux_width = fdf->width;
 	j++;
 	while (j < i)
 	{
-		fdf.int_matrix[j] = to_int_matrix(fdf.char_matrix[j], &fdf);
-		if (!fdf.int_matrix[j])
-			return (fdf);
-		if (aux_width != fdf.width)
+		fdf->int_matrix[j] = to_int_matrix(fdf->char_matrix[j], fdf);
+		if (!fdf->int_matrix[j])
+			return ;
+		if (aux_width != fdf->width)
 		{
 			printf("map error");
-			return (fdf);
+			return ;
 		}
 		j++;
 	}
-	return (fdf);
 }

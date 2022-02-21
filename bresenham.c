@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/19 17:50:08 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/21 12:58:03 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,11 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	//y = x * sin(angle) + y * cos(angle);
 	//x2 = x2 * cos(angle) - y2 * sin(angle);
 	//y2 = x2 * sin(angle) + y2 * cos(angle);
-
 	if (fdf->perspective == 0)
 	{
 		isometric(&x, &y, z);
 		isometric(&x2, &y2, z2);
 	}
-
 
 	x_step = x2 - x;
 	y_step = y2 - y;
@@ -82,10 +80,10 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	x_step /= max;
 	y_step /= max;
 
-	x += 500;
-	y += 200;
-	x2 += 500;
-	y2 += 200;
+	x = x + fdf->move_x;
+	y = y + fdf->move_y;
+	x2 = x2 + fdf->move_x;
+	y2 = y2 + fdf->move_y;
 	while ((int )(x - x2) || (int )(y - y2))
 	{
 		/*if (z != 0 || z2 != 0)

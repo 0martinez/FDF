@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/17 17:22:35 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:17:17 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
 
 typedef struct s_fdf
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
 
-	int		width;
-	int		height;
-	int		move_x;
-	int		move_y;
-	int		zoom;
-	int		perspective;
-	int		**int_matrix;
-	char	**char_matrix;
-	int		error;
+	int				width;
+	int				height;
+	int				zoom;
+	int				**int_matrix;
+	char			**char_matrix;
+	int				move_x;
+	int				move_y;
+	int				perspective;
+
 }	t_fdf;
 
 char			**ft_split(char const *s, char c);
@@ -49,7 +49,7 @@ int				hex_to_dec(char *str);
 
 int				ft_atoi(const char *str);
 
-struct s_fdf	get_char_matrix(t_fdf fdf, char *str, int *i);
-struct s_fdf	get_int_matrix(t_fdf fdf, int i);
+void			get_char_matrix(t_fdf *fdf, char *str, int *i);
+void			get_int_matrix(t_fdf *fdf, int i);
 
 #endif
