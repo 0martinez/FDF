@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 19:13:37 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/22 13:04:56 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,16 @@ int	deal_key(int key, t_fdf *fdf)
 	}
 	//z6 x7 y16
 	//r15 l37
-
+	if (key == 7)
+	{
+		fdf->rotation = ON;
+		fdf->angle += 0.05;
+	}
+	if (key == 6)
+	{
+		fdf->rotation = ON;
+		fdf->angle -= 0.05;
+	}
 	/*
 	if (fdf->axe == 0)
 	{
@@ -131,7 +140,7 @@ struct s_fdf	*init_struct(void)
 	fdf->perspective = 0;
 	fdf->mlx_ptr = mlx_init();
 	fdf->win_ptr = mlx_new_window(fdf->mlx_ptr, 1000, 1000, "first_try");
-	fdf->zoom = 5;
+	fdf->zoom = 2;
 	fdf->angle = 1;
 	fdf->rotation = 0;
 	fdf->x_rot = 0;

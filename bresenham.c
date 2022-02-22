@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 19:24:43 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/22 13:11:11 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,26 @@ int	maxx(float x, float y)
 	return (y);
 }
 
-void	isometric(float *x, float *y, int z)
+void	isometric(float *x, float *y, int z, t_fdf *fdf)
 {
-	*x = (*x - *y) * cos(1);
-	*y = (*x + *y) * sin(1) - z;
+	*x = (*x - *y) * cos(fdf->angle);
+	*y = (*x + *y) * sin(fdf->angle) - z;
 }
+
+void	handle_rotation(float *x, float *y, int *z, t_fdf *fdf)
+{
+	fdf->rotation = OFF;
+	fdf->angle += 0.05;
+
+
+	printf("x: %f| y: %f | z: %d\n", *x, *y, *z);
+	*x = *x;
+	*y += (*y * cos(fdf->angle)) - (*z * sin(fdf->angle));
+	*z += (*y * sin(fdf->angle)) + (*z * cos(fdf->angle));
+	printf("new   x: %f| y: %f | z: %d\n", *x, *y, *z);
+}
+
+
 
 void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 {
@@ -49,12 +64,9 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	int		z;
 	int		z2;
 	int		color;
-	//float	angle;
-
-
 
 	if (fdf->palette == 0)
-		color = get_color(y, x, fdf);
+		color = fdf->color_matrix[(int)y][(int)x];
 	if (fdf->palette == 1)
 		color = 0x00ff00;
 	z = fdf->int_matrix[(int)y][(int)x];
@@ -69,8 +81,8 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 
 	if (fdf->perspective == 0)
 	{
-		isometric(&x, &y, z);
-		isometric(&x2, &y2, z2);
+		isometric(&x, &y, z, fdf);
+		isometric(&x2, &y2, z2, fdf);
 	}
 
 	x_step = x2 - x;
@@ -83,16 +95,6 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 	y = y + fdf->move_y;
 	x2 = x2 + fdf->move_x;
 	y2 = y2 + fdf->move_y;
-	/*
-	if (fdf->rotation == ON)
-	{
-
-		x = x + fdf->x_rot;
-		y = y + fdf->y_rot;
-		z = z + fdf->rotate;
-	}
-	*/
-	//mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 20, 0x00ff00, "hola");
 	while ((int )(x - x2) || (int )(y - y2))
 	{
 		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )x, (int )y, color);

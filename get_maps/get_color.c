@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:55:06 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 19:17:48 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:02:14 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,8 @@ int	*get_color_pointer(t_fdf *fdf, int j)
 	while (i < fdf->width)
 	{
 		color_str[i] = get_color(j, i, fdf);
-		//printf("%d ", color_str[i]);
 		i++;
 	}
-	//getchar();
 	return (color_str);
 }
 
