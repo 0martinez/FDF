@@ -6,11 +6,11 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:20:17 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/05 17:35:04 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:13:12 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_fdf.h"
+#include "../my_fdf.h"
 
 size_t	wordcount(char const *s, char c)
 {

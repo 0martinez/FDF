@@ -6,20 +6,11 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/22 13:11:11 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:46:05 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-
-/*
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}*/
 
 float	mod(float i)
 {
@@ -41,21 +32,6 @@ void	isometric(float *x, float *y, int z, t_fdf *fdf)
 	*y = (*x + *y) * sin(fdf->angle) - z;
 }
 
-void	handle_rotation(float *x, float *y, int *z, t_fdf *fdf)
-{
-	fdf->rotation = OFF;
-	fdf->angle += 0.05;
-
-
-	printf("x: %f| y: %f | z: %d\n", *x, *y, *z);
-	*x = *x;
-	*y += (*y * cos(fdf->angle)) - (*z * sin(fdf->angle));
-	*z += (*y * sin(fdf->angle)) + (*z * cos(fdf->angle));
-	printf("new   x: %f| y: %f | z: %d\n", *x, *y, *z);
-}
-
-
-
 void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 {
 	float	x_step;
@@ -69,6 +45,7 @@ void	print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf)
 		color = fdf->color_matrix[(int)y][(int)x];
 	if (fdf->palette == 1)
 		color = 0x00ff00;
+
 	z = fdf->int_matrix[(int)y][(int)x];
 	z2 = fdf->int_matrix[(int)y2][(int)x2];
 	z = z * fdf->z_escalar;

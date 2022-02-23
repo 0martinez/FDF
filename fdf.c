@@ -6,43 +6,11 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/22 13:04:56 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:10:36 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-
-void	draw_matrix(t_fdf *fdf)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	i = 0;
-	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 20, 0x00ff00, "move map: left | up | down | right");
-	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 40, 0x00ff00, "zoom: + | -");
-	if (fdf->perspective == 0)
-		mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 60, 0x00ff00, "change perspective to conic: p");
-	else
-		mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 60, 0x00ff00, "change perspective to isometric: p");
-	if (fdf->palette == 0)
-		mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 80, 0x00ff00, "change to matrix palete: c");
-	else
-		mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 80, 0x00ff00, "change to premade palete: c");
-	while (j < fdf->height)
-	{
-		i = 0;
-		while (i < fdf->width)
-		{
-			if (i < fdf->width - 1)
-				print_bresenham(i, j, i + 1, j, fdf);
-			if (j < fdf->height - 1)
-				print_bresenham(i, j, i, j + 1, fdf);
-			i++;
-		}
-		j++;
-	}
-}
 
 int	mouse_hook(int key, int x, int y, t_fdf *fdf)
 {
@@ -53,76 +21,6 @@ int	mouse_hook(int key, int x, int y, t_fdf *fdf)
 		fdf->z_escalar *= 0.8;
 	x = 0;
 	y = 0;
-	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
-	draw_matrix(fdf);
-	return (0);
-}
-
-int	deal_key(int key, t_fdf *fdf)
-{
-	printf("%d\n", key);
-	if (key == 126)
-		fdf->move_y -= 50;
-	if (key == 125)
-		fdf->move_y += 50;
-	if (key == 124)
-		fdf->move_x += 50;
-	if (key == 123)
-		fdf->move_x -= 50;
-	if (key == 30)
-		fdf->zoom += 2;
-	if (key == 44)
-		fdf->zoom -= 2;
-	if (key == 35)
-	{
-		if (fdf->perspective == 0)
-			fdf->perspective = 1;
-		else
-			fdf->perspective = 0;
-	}
-	if (key == 8)
-	{
-		if (fdf->palette == 0)
-			fdf->palette = 1;
-		else
-			fdf->palette = 0;
-	}
-	//z6 x7 y16
-	//r15 l37
-	if (key == 7)
-	{
-		fdf->rotation = ON;
-		fdf->angle += 0.05;
-	}
-	if (key == 6)
-	{
-		fdf->rotation = ON;
-		fdf->angle -= 0.05;
-	}
-	/*
-	if (fdf->axe == 0)
-	{
-		if (key == 15)
-		{
-			fdf->x_rot = x;
-			fdf->y_rot = y * cos(θ) - z * sin(θ);
-			fdf->z_rot = y * sin(θ) + z * cos(θ);
-		}
-		if (key == 37)
-		{
-
-		}
-	}
-	else if (fdf->axe == 1)
-	{
-
-	}
-	else if (fdf->axe == 2)
-	{
-
-	}
-	else
-		fdf->rotation = OFF;*/
 	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
 	draw_matrix(fdf);
 	return (0);

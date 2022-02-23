@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 19:00:05 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:10:26 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,17 @@ void			get_maps(t_fdf *fdf, char *str);
 void			get_char_matrix(t_fdf *fdf, char *str, int *i);
 void			get_int_matrix(t_fdf *fdf, int i);
 void			get_color_matrix(t_fdf *fdf);
+
+int				deal_key(int key, t_fdf *fdf);
+void			handle_moves(int key, t_fdf *fdf);
+void			handle_zoom(int key, t_fdf *fdf);
+void			handle_perspective(int key, t_fdf *fdf);
+void			handle_palette(int key, t_fdf *fdf);
+void			handle_rotation(int key, t_fdf *fdf);
+
+void			draw_matrix(t_fdf *fdf);
+
+void			print_controls(t_fdf *fdf);
+void			draw_matrix(t_fdf *fdf);
 
 #endif
