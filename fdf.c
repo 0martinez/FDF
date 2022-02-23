@@ -66,3 +66,8 @@ int	main(int argc, char **argv)
 
 	return (0);
 }
+
+/*rot_x(vars, &point.y, &point.z);
+	rot_y(vars, &point.x, &point.z);
+	rot_z(vars, &point.x, &point.y);
+	isometric(vars, &point.x, &point.y, point.z);*/
