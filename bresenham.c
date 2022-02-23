@@ -67,6 +67,23 @@ void	apply_perspecive(t_fdf *fdf, t_axes *first, t_axes *second, t_aux *src)
 	}
 }
 
+void	bresenham(t_axes first, t_axes second, t_aux *src)
+{
+	src->x_step = second.x - first.x;
+	src->y_step = second.y - first.y;
+	src->max = maxx(mod(src->x_step), mod(src->y_step));
+	src->x_step /= src->max;
+	src->y_step /= src->max;
+}
+
+void	move_object(t_axes *first, t_axes *second, t_fdf *fdf)
+{
+	first->x = first->x + fdf->move_x;
+	first->y = first->y + fdf->move_y;
+	second->x = second->x + fdf->move_x;
+	second->y = second->y + fdf->move_y;
+}
+
 
 
 void	print_bresenham(t_axes first, t_axes second, t_fdf *fdf)
@@ -78,16 +95,20 @@ void	print_bresenham(t_axes first, t_axes second, t_fdf *fdf)
 	apply_zoom(&first, &second, fdf);
 	apply_perspecive(fdf, &first, &second, &src);
 
-	src.x_step = second.x - first.x;
+	bresenham(first, second, &src);
+	/*src.x_step = second.x - first.x;
 	src.y_step = second.y - first.y;
 	src.max = maxx(mod(src.x_step), mod(src.y_step));
 	src.x_step /= src.max;
-	src.y_step /= src.max;
+	src.y_step /= src.max;*/
 
-	first.x = first.x + fdf->move_x;
+	move_object(&first, &second, fdf);
+	/*first.x = first.x + fdf->move_x;
 	first.y = first.y + fdf->move_y;
 	second.x = second.x + fdf->move_x;
-	second.y = second.y + fdf->move_y;
+	second.y = second.y + fdf->move_y;*/
+	
+	
 	while ((int )(first.x - second.x) || (int )(first.y - second.y))
 	{
 		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int )first.x, (int )first.y, src.color);

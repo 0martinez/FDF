@@ -20,6 +20,8 @@
 
 # define ON 1
 # define OFF 0
+# define FOR_X 0
+# define FOR_Y 1
 
 typedef struct s_axes
 {
@@ -90,7 +92,7 @@ void			handle_perspective(int key, t_fdf *fdf);
 void			handle_palette(int key, t_fdf *fdf);
 void			handle_rotation(int key, t_fdf *fdf);
 
-void			draw_matrix(t_fdf *fdf);
+void			draw_map(t_fdf *fdf);
 
 void			print_controls(t_fdf *fdf);
 void			draw_matrix(t_fdf *fdf);

@@ -33,7 +33,21 @@ void	print_controls(t_fdf *fdf)
 		"end program: ESC");
 }
 
-void	draw_matrix(t_fdf *fdf)
+void	get_second_value(t_axes *first, t_axes *second, int flg)
+{
+	if (flg == FOR_X)
+	{
+		second->x = first->x + 1;
+		second->y = first->y;
+	}
+	else
+	{
+		second->x = first->x;
+		second->y = first->y + 1;
+	}
+}
+
+void	draw_map(t_fdf *fdf)
 {
 	t_axes	first;
 	t_axes	second;
@@ -47,14 +61,16 @@ void	draw_matrix(t_fdf *fdf)
 		{
 			if (first.x < fdf->width - 1)
 			{
-				second.x = first.x + 1;
-				second.y = first.y;
+				get_second_value(&first, &second, FOR_X);
+				//second.x = first.x + 1;
+				//second.y = first.y;
 				print_bresenham(first, second, fdf);
 			}
 			if (first.y < fdf->height - 1)
 			{
-				second.x = first.x;
-				second.y = first.y + 1;
+				get_second_value(&first, &second, FOR_Y);
+				//second.x = first.x;
+				//second.y = first.y + 1;
 				print_bresenham(first, second, fdf);
 			}
 			first.x++;

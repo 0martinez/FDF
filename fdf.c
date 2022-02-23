@@ -21,7 +21,7 @@ int	mouse_hook(int key, int x, int y, t_fdf *fdf)
 	x = 0;
 	y = 0;
 	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
-	draw_matrix(fdf);
+	draw_map(fdf);
 	return (0);
 }
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 		return (0);
 	fdf = init_struct();
 	get_maps(fdf, argv[1]);
-	draw_matrix(fdf);
+	draw_map(fdf);
 	mlx_key_hook(fdf->win_ptr, deal_key, fdf);
 	mlx_mouse_hook(fdf->win_ptr, mouse_hook, fdf);
 	mlx_loop(fdf->mlx_ptr);
