@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/23 13:10:36 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:06:07 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	mouse_hook(int key, int x, int y, t_fdf *fdf)
 {
-	printf("%d\n", key);
 	if (key == 4)
 		fdf->z_escalar *= 1.2;
 	if (key == 5)
@@ -49,14 +48,12 @@ struct s_fdf	*init_struct(void)
 	return (fdf);
 }
 
+
+
 int	main(int argc, char **argv)
 {
-	int		i;
-	int		j;
 	t_fdf	*fdf;
 
-	i = 0;
-	j = 0;
 	if (argc != 2)
 		return (0);
 	fdf = init_struct();
@@ -65,5 +62,7 @@ int	main(int argc, char **argv)
 	mlx_key_hook(fdf->win_ptr, deal_key, fdf);
 	mlx_mouse_hook(fdf->win_ptr, mouse_hook, fdf);
 	mlx_loop(fdf->mlx_ptr);
+	free(fdf);
+
 	return (0);
 }

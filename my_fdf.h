@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/23 13:10:26 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:06:13 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@
 
 # define ON 1
 # define OFF 0
+
+typedef struct s_axes
+{
+	float	x;
+	float	y;
+}	t_axes;
+
+typedef struct s_aux
+{
+	float	x_step;
+	float	y_step;
+	int		max;
+	int		z;
+	int		z2;
+	int		color;
+}	t_aux;
 
 typedef struct s_fdf
 {
@@ -51,7 +67,8 @@ char			**ft_split(char const *s, char c);
 void			*free_split(char **aux, int words);
 size_t			wordcount(char const *s, char c);
 
-void			print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf);
+//void			print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf);
+void			print_bresenham(t_axes first, t_axes second, t_fdf *fdf);
 
 int				get_color(int j, int i, t_fdf *fdf);
 

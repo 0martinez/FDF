@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:09:04 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/23 13:09:55 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:59:19 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,37 @@ void	print_controls(t_fdf *fdf)
 	else
 		mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 80, 0x00ff00,
 			"change to premade palette: c");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 100, 0x00ff00,
+		"end program: ESC");
 }
 
 void	draw_matrix(t_fdf *fdf)
 {
-	int	i;
-	int	j;
+	t_axes	first;
+	t_axes	second;
 
-	j = 0;
-	i = 0;
-	print_controls(fdf);
-	while (j < fdf->height)
+	first.x = 0;
+	first.y = 0;
+	while (first.y < fdf->height)
 	{
-		i = 0;
-		while (i < fdf->width)
+		first.x = 0;
+		while (first.x < fdf->width)
 		{
-			if (i < fdf->width - 1)
-				print_bresenham(i, j, i + 1, j, fdf);
-			if (j < fdf->height - 1)
-				print_bresenham(i, j, i, j + 1, fdf);
-			i++;
+			if (first.x < fdf->width - 1)
+			{
+				second.x = first.x + 1;
+				second.y = first.y;
+				print_bresenham(first, second, fdf);
+			}
+			if (first.y < fdf->height - 1)
+			{
+				second.x = first.x;
+				second.y = first.y + 1;
+				print_bresenham(first, second, fdf);
+			}
+			first.x++;
 		}
-		j++;
+		first.y++;
 	}
+	print_controls(fdf);
 }
