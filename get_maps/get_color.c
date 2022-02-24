@@ -6,11 +6,22 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:55:06 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 17:39:21 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 19:57:07 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../my_fdf.h"
+
+int	check_color_error(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (0);
+	if (c >= 'A' && c <= 'F')
+		return (0);
+	if (c >= 'a' && c <= 'f')
+		return (0);
+	return (1);
+}
 
 int	hex_to_dec(char *str)
 {
@@ -69,7 +80,9 @@ int	get_color(int j, int i, t_fdf *fdf)
 	else if (wordcount(split[i], ',') == 1)
 		color = 0xffffff;
 	else
-		printf("wtf");
+	{
+		return (0);
+	}
 	while (split[len] != 0)
 	{
 		free(split[len]);

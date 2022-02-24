@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 17:15:29 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 19:58:34 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define OFF 0
 # define FOR_X 0
 # define FOR_Y 1
+# define MAP_ERROR 1
+# define COLOR_ERROR 1
+# define EMPTY_LINE 2
 
 typedef struct s_axes
 {
@@ -77,7 +80,6 @@ char			**ft_split(char const *s, char c);
 void			*free_split(char **aux, int words);
 size_t			wordcount(char const *s, char c);
 
-//void			print_bresenham(float x, float y, float x2, float y2, t_fdf *fdf);
 void			print_bresenham(t_axes first, t_axes second, t_fdf *fdf);
 
 int				get_color(int j, int i, t_fdf *fdf);
@@ -90,7 +92,7 @@ int				ft_atoi(const char *str);
 
 void			get_maps(t_fdf *fdf, char *str);
 void			get_char_matrix(t_fdf *fdf, char *str, int *i);
-void			get_int_matrix(t_fdf *fdf, int i);
+void			get_int_matrix(t_fdf *fdf, int i, int *error);
 void			get_color_matrix(t_fdf *fdf);
 
 int				deal_key(int key, t_fdf *fdf);
@@ -109,5 +111,7 @@ void			draw_map(t_fdf *fdf);
 void			rotate_x_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 void			rotate_y_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 void			rotate_z_exe(t_axes *first, t_axes *second, t_fdf *fdf);
+
+void			leaks(void);
 
 #endif

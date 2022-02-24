@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 17:42:37 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:47:55 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,16 @@
 int	mouse_hook(int key, int x, int y, t_fdf *fdf)
 {
 	if (key == 4)
-		fdf->z_escalar *= 1.2;
+	{
+		if ((fdf->z_escalar * 1.2) < 250)
+			fdf->z_escalar *= 1.2;
+	}
 	if (key == 5)
-		fdf->z_escalar *= 0.8;
+	{
+		if ((fdf->z_escalar * 0.8) > 0.001)
+			fdf->z_escalar *= 0.8;
+
+	}
 	x = 0;
 	y = 0;
 	fdf->img_ptr = mlx_new_image(fdf->mlx_ptr, 1950, 1080);

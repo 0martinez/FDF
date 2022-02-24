@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:02:07 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 17:54:59 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:52:14 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	*to_int_matrix(char *line, t_fdf *fdf)
 	return (to_return);
 }
 
-void	get_int_matrix(t_fdf *fdf, int i)
+void	get_int_matrix(t_fdf *fdf, int i, int *error)
 {
 	int	aux_width;
 	int	j;
@@ -114,7 +114,7 @@ void	get_int_matrix(t_fdf *fdf, int i)
 			return ;
 		if (aux_width != fdf->width)
 		{
-			printf("map error");
+			*error = MAP_ERROR;
 			return ;
 		}
 		j++;

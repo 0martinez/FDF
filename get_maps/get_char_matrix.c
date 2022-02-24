@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:59:41 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 15:01:55 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:49:00 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	get_char_matrix(t_fdf *fdf, char *str, int *i)
 		line = get_next_line(fd);
 		j++;
 	}
+	close(fd);
 	*i = j;
 	return ;
 }

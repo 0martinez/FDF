@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:00:54 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 17:58:32 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:10:45 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	deal_key(int key, t_fdf *fdf)
 	if (key == 53)
 	{
 		fdf = to_be_free(fdf);
+		write(1, "EXIT SUCCES!\n", 13);
 		atexit(leaks);
 		exit (0);
 	}
