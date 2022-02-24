@@ -27,6 +27,10 @@ int	deal_key(int key, t_fdf *fdf)
 		handle_rotation(key, fdf);
 	if (key == 53)
 		exit (0);
+	if (key == 7 || key == 6 || key == 'y')
+	{
+	
+	}
 	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
 	draw_matrix(fdf);
 	return (0);

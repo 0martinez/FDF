@@ -31,6 +31,9 @@ void	print_controls(t_fdf *fdf)
 			"change to premade palette: c");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 100, 0x00ff00,
 		"end program: ESC");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 120, 0x00ff00, "rotate around x axis: z / x");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 140, 0x00ff00, "rotate around y axis: a / s");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 160, 0x00ff00, "rotate around z axis: q / w");
 }
 
 void	get_second_value(t_axes *first, t_axes *second, int flg)

@@ -42,12 +42,16 @@ int	apply_palette(float y, float x, t_fdf *fdf)
 		return (0x00ff00);
 }
 
-void	get_z_value(t_aux *src, t_fdf *fdf, t_axes first, t_axes second)
+void	get_z_value(t_aux *src, t_fdf *fdf, t_axes *first, t_axes *second)
 {
-	src->z = fdf->int_matrix[(int)first.y][(int)first.x];
+	first->z = fdf->int_matrix[(int)first->y][(int)first->x];
+	second->z = fdf->int_matrix[(int)second->y][(int)second->x];
+	first->z *= fdf->z_escalar;
+	second->z *= fdf->z_escalar;
+	/*src->z = fdf->int_matrix[(int)first.y][(int)first.x];
 	src->z2 = fdf->int_matrix[(int)second.y][(int)second.x];
-	src->z = src->z * fdf->z_escalar;
-	src->z2 = src->z2 * fdf->z_escalar;
+	src->z *= fdf->z_escalar;
+	src->z2 *= fdf->z_escalar;*/
 }
 
 void	apply_zoom(t_axes *first, t_axes *second, t_fdf *fdf)
@@ -62,9 +66,14 @@ void	apply_perspecive(t_fdf *fdf, t_axes *first, t_axes *second, t_aux *src)
 {
 	if (fdf->perspective == 0)
 	{
+		isometric(first->z, fdf, first);
+		isometric(second->z, fdf, second);
+	}
+	/*if (fdf->perspective == 0)
+	{
 		isometric(src->z, fdf, first);
 		isometric(src->z2, fdf, second);
-	}
+	}*/
 }
 
 void	bresenham(t_axes first, t_axes second, t_aux *src)
@@ -78,10 +87,10 @@ void	bresenham(t_axes first, t_axes second, t_aux *src)
 
 void	move_object(t_axes *first, t_axes *second, t_fdf *fdf)
 {
-	first->x = first->x + fdf->move_x;
-	first->y = first->y + fdf->move_y;
-	second->x = second->x + fdf->move_x;
-	second->y = second->y + fdf->move_y;
+	first->x += fdf->move_x;
+	first->y += fdf->move_y;
+	second->x += fdf->move_x;
+	second->y += fdf->move_y;
 }
 
 
@@ -91,7 +100,7 @@ void	print_bresenham(t_axes first, t_axes second, t_fdf *fdf)
 	t_aux	src;
 
 	src.color = apply_palette(first.y, first.x, fdf);
-	get_z_value(&src, fdf, first, second);
+	get_z_value(&src, fdf, &first, &second);
 	apply_zoom(&first, &second, fdf);
 	apply_perspecive(fdf, &first, &second, &src);
 

@@ -45,6 +45,7 @@ struct s_fdf	*init_struct(void)
 	fdf->z_rot = 0;
 	fdf->z_escalar = 1;
 	fdf->palette = 1;
+	fdf->selected_axis = 0;
 	return (fdf);
 }
 

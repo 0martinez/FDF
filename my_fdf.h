@@ -27,6 +27,7 @@ typedef struct s_axes
 {
 	float	x;
 	float	y;
+	int		z;
 }	t_axes;
 
 typedef struct s_aux
@@ -59,7 +60,8 @@ typedef struct s_fdf
 	int				rotation;
 	float			x_rot;
 	float			y_rot;
-	int				z_rot;
+	float			z_rot;
+	int				selected_axis;
 	float			z_escalar;
 	int				palette;
 
@@ -91,6 +93,7 @@ void			handle_zoom(int key, t_fdf *fdf);
 void			handle_perspective(int key, t_fdf *fdf);
 void			handle_palette(int key, t_fdf *fdf);
 void			handle_rotation(int key, t_fdf *fdf);
+void			handle_key_rotation(t_fdf *fdf, int key);
 
 void			draw_map(t_fdf *fdf);
 
