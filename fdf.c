@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/23 20:06:07 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:42:37 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ int	mouse_hook(int key, int x, int y, t_fdf *fdf)
 		fdf->z_escalar *= 0.8;
 	x = 0;
 	y = 0;
+	fdf->img_ptr = mlx_new_image(fdf->mlx_ptr, 1950, 1080);
+		fdf->img_addr = mlx_get_data_addr(fdf->img_ptr, &fdf->bits_per_pixel,
+			&fdf->line_length, &fdf->endian);
 	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
 	draw_map(fdf);
+	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img_ptr, 0, 0);
+	print_controls(fdf);
 	return (0);
 }
 
@@ -36,7 +41,10 @@ struct s_fdf	*init_struct(void)
 	fdf->move_y = 200;
 	fdf->perspective = 0;
 	fdf->mlx_ptr = mlx_init();
-	fdf->win_ptr = mlx_new_window(fdf->mlx_ptr, 1000, 1000, "first_try");
+	fdf->win_ptr = mlx_new_window(fdf->mlx_ptr, 1950, 1080, "FDF");
+	fdf->img_ptr = mlx_new_image(fdf->mlx_ptr, 1950, 1080);
+	fdf->img_addr = mlx_get_data_addr(fdf->img_ptr, &fdf->bits_per_pixel,
+			&fdf->line_length, &fdf->endian);
 	fdf->zoom = 2;
 	fdf->angle = 1;
 	fdf->rotation = 0;
@@ -46,15 +54,16 @@ struct s_fdf	*init_struct(void)
 	fdf->z_escalar = 1;
 	fdf->palette = 1;
 	fdf->selected_axis = 0;
+	fdf->exit = 0;
 	return (fdf);
 }
-
-
 
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
+	int		i;
 
+	i = 0;
 	if (argc != 2)
 		return (0);
 	fdf = init_struct();
@@ -62,13 +71,8 @@ int	main(int argc, char **argv)
 	draw_map(fdf);
 	mlx_key_hook(fdf->win_ptr, deal_key, fdf);
 	mlx_mouse_hook(fdf->win_ptr, mouse_hook, fdf);
+	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img_ptr, 0, 0);
+	print_controls(fdf);
 	mlx_loop(fdf->mlx_ptr);
-	free(fdf);
-
 	return (0);
 }
-
-/*rot_x(vars, &point.y, &point.z);
-	rot_y(vars, &point.x, &point.z);
-	rot_z(vars, &point.x, &point.y);
-	isometric(vars, &point.x, &point.y, point.z);*/

@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:04:01 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/23 13:04:26 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:42:31 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,12 @@ void	handle_perspective(int key, t_fdf *fdf)
 	if (key == 35)
 	{
 		if (fdf->perspective == 0)
+		{
 			fdf->perspective = 1;
+			fdf->x_rot = 0;
+			fdf->y_rot = 0;
+			fdf->z_rot = 0;
+		}
 		else
 			fdf->perspective = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:03:11 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 19:02:16 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:03:16 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	get_maps(t_fdf *fdf, char *str)
 	get_int_matrix(fdf, i);
 	write(1, "READING MAP...\n", 15);
 	get_color_matrix(fdf);
+	write(1, "--PRINTING MAP--\n", 16);
 }

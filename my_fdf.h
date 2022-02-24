@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/23 18:06:13 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:15:29 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,13 @@ typedef struct s_fdf
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
+	char			*img_addr;
 
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+
+	int				exit;
 	int				width;
 	int				height;
 	float			zoom;
@@ -98,6 +104,10 @@ void			handle_key_rotation(t_fdf *fdf, int key);
 void			draw_map(t_fdf *fdf);
 
 void			print_controls(t_fdf *fdf);
-void			draw_matrix(t_fdf *fdf);
+void			draw_map(t_fdf *fdf);
+
+void			rotate_x_exe(t_axes *first, t_axes *second, t_fdf *fdf);
+void			rotate_y_exe(t_axes *first, t_axes *second, t_fdf *fdf);
+void			rotate_z_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 
 #endif

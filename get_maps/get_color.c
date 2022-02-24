@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:55:06 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/22 12:02:14 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:39:21 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,19 @@ int	management_color(char *str)
 {
 	int		color;
 	char	**color_str;
+	int		i;
 
+	i = 0;
 	color_str = ft_split(str, ',');
 	if (!color_str)
 		return (0);
 	color = hex_to_dec(color_str[1]);
-	free(color_str[0]);
+	while (color_str[i] != 0)
+	{
+		free(color_str[i]);
+		i++;
+	}
+	free(color_str);
 	return (color);
 }
 
@@ -64,8 +71,11 @@ int	get_color(int j, int i, t_fdf *fdf)
 	else
 		printf("wtf");
 	while (split[len] != 0)
+	{
+		free(split[len]);
 		len++;
-	free_split(split, len);
+	}
+	free(split);
 	return (color);
 }
 

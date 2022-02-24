@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotation.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/24 12:55:03 by omartine          #+#    #+#             */
+/*   Updated: 2022/02/24 12:55:06 by omartine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "my_fdf.h"
 
@@ -6,7 +16,7 @@ void	rotate_x_exe(t_axes *first, t_axes *second, t_fdf *fdf)
 {
 	float	pre_y1;
 	float	pre_y2;
-	
+
 	pre_y1 = first->y;
 	pre_y2 = second->y;
 	first->y = (first->y * cos(fdf->x_rot)) + (first->z * sin(fdf->x_rot));

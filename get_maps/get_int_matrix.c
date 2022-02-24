@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:02:07 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/21 15:02:28 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:54:59 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	*to_int_matrix(char *line, t_fdf *fdf)
 {
 	char	**char_matrix;
 	int		*to_return;
+	char	*line_aux;
 	int		i;
 
 	i = 0;
@@ -74,11 +75,21 @@ int	*to_int_matrix(char *line, t_fdf *fdf)
 		else
 		{
 			if (char_matrix[i][0] != '\n')
-				to_return[i] = ft_atoi(no_jump_line(char_matrix[i]));
+			{
+				line_aux = no_jump_line(char_matrix[i]);
+				to_return[i] = ft_atoi(line_aux);
+				free(line_aux);
+			}
 		}
 		i++;
 	}
-	char_matrix = free_split(char_matrix, wordcount(line, ' '));
+	i = 0;
+	while (char_matrix[i] != 0)
+	{
+		free(char_matrix[i]);
+		i++;
+	}
+	free(char_matrix);
 	return (to_return);
 }
 
