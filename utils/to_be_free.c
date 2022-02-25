@@ -1,6 +1,6 @@
 
 
-#include "my_fdf.h"
+#include "../my_fdf.h"
 
 t_fdf	*to_be_free(t_fdf *fdf)
 {

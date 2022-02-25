@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_fdf.h"
+#include "../../../my_fdf.h"
 
 void	rotate_x_exe(t_axes *first, t_axes *second, t_fdf *fdf)
 {
