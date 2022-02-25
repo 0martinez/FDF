@@ -6,11 +6,37 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:03:11 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 19:57:35 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/25 17:52:20 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../my_fdf.h"
+
+void	free_char_matrix(t_fdf *fdf)
+{
+	int	i;
+
+	i = 0;
+	while (fdf->char_matrix[i] != 0)
+	{
+		free(fdf->char_matrix[i]);
+		i++;
+	}
+	free(fdf->char_matrix);
+}
+
+void	free_int_matrix(t_fdf *fdf)
+{
+	int	i;
+
+	i = 0;
+	while (i < fdf->height)
+	{
+		free(fdf->int_matrix);
+		i++;
+	}
+	free(fdf->int_matrix);
+}
 
 void	handle_map_error(t_fdf *fdf, int flg, int error)
 {
@@ -24,27 +50,12 @@ void	handle_map_error(t_fdf *fdf, int flg, int error)
 		atexit(leaks);
 		exit (0);
 	}
-	if (flg == 1 && error != 0)
+	if (flg != 0 && error != 0)
 	{
 		if (error == MAP_ERROR || error == EMPTY_LINE)
 		{
-			i = 0;
-			while (fdf->char_matrix[i] != 0)
-			{
-				free(fdf->char_matrix[i]);
-				i++;
-			}
-			free(fdf->char_matrix);
 			if (error == EMPTY_LINE)
-			{
-				i = 0;
-				while (i < fdf->height)
-				{
-					free(fdf->int_matrix);
-					i++;
-				}
-				free(fdf->int_matrix);
-			}
+				free_int_matrix(fdf);
 			write(1, "MAP ERROR", 9);
 			atexit(leaks);
 			exit (0);

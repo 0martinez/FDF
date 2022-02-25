@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 18:47:55 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/25 18:46:24 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ struct s_fdf	*init_struct(void)
 	fdf->y_rot = 0;
 	fdf->z_rot = 0;
 	fdf->z_escalar = 1;
-	fdf->palette = 1;
+	fdf->palette = 0;
 	fdf->selected_axis = 0;
 	fdf->exit = 0;
 	return (fdf);
@@ -47,7 +47,10 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	if (argc != 2)
+	{
+		write(1, "Incorrect number of arguments", 29);
 		return (0);
+	}
 	fdf = init_struct();
 	get_maps(fdf, argv[1]);
 	draw_map(fdf);

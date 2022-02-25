@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/25 12:52:14 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/25 18:44:36 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ void			get_char_matrix(t_fdf *fdf, char *str, int *i);
 void			get_int_matrix(t_fdf *fdf, int i, int *error);
 void			get_color_matrix(t_fdf *fdf);
 
+int				check_color_error(char c);
+int				hex_to_dec(char *str);
+
 int				deal_key(int key, t_fdf *fdf);
 int				mouse_hook(int key, int x, int y, t_fdf *fdf);
 void			handle_moves(int key, t_fdf *fdf);
@@ -116,6 +119,12 @@ void			rotate_z_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 int				check_if_jump(char *line);
 char			*no_jump_line(char *line);
 void			free_aux(char **char_matrix);
+void			handle_jump_line(char **char_matrix, char *line,
+					t_fdf *fdf, int *to_return);
+void			handle_error(t_fdf *fdf, int aux_width, int *error, int j);
+void			check_error_int(t_fdf *fdf, int *error, int aux_width, int j);
+int				*get_return_value(char *line, char **char_matrix);
+t_fdf			*handle_diferent_length(t_fdf *fdf, int j);
 
 void			isometric(int z, t_fdf *fdf, t_axes *axe);
 void			apply_perspecive(t_fdf *fdf, t_axes *first, t_axes *second);

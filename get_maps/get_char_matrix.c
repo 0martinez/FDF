@@ -6,11 +6,21 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:59:41 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 18:49:00 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/25 13:30:26 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../my_fdf.h"
+
+int	new_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != 0 && str[i] != '\n')
+		i++;
+	return (i);
+}
 
 char	*copy_lane(char *line)
 {
