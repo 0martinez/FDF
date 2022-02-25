@@ -16,10 +16,11 @@ LIB_MLX		= libmlx.dylib
 
 SRCS =		fdf.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 			utils/split.c bresenham.c utils/ft_atoi.c \
-			get_maps/get_char_matrix.c get_maps/get_int_matrix.c get_maps/get_maps.c \
+			get_maps/get_char_matrix.c get_maps/get_int_matrix/get_int_matrix.c \
+			get_maps/get_int_matrix/get_int_matrix_utils.c get_maps/get_maps.c \
 			get_maps/get_color.c deal_keys/keys_management.c deal_keys/handle_keys.c \
 			print_on_screen/controls_and_matrix.c deal_keys/handle_keys_rotation.c \
-			rotation.c
+			rotation.c to_be_free.c
 
 OBJS		= $(SRCS:.c=.o)
 

@@ -12,6 +12,17 @@
 
 #include "../my_fdf.h"
 
+void	draw_map_process(t_fdf *fdf)
+{
+	fdf->img_ptr = mlx_new_image(fdf->mlx_ptr, 1950, 1080);
+		fdf->img_addr = mlx_get_data_addr(fdf->img_ptr, &fdf->bits_per_pixel,
+			&fdf->line_length, &fdf->endian);
+	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
+	draw_map(fdf);
+	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img_ptr, 0, 0);
+	print_controls(fdf);
+}
+
 void	print_controls(t_fdf *fdf)
 {
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 20, 20, 0x00ff00,
@@ -79,5 +90,4 @@ void	draw_map(t_fdf *fdf)
 		}
 		first.y++;
 	}
-	//print_controls(fdf);
 }

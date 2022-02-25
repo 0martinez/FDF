@@ -10,45 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../my_fdf.h"
+#include "../../my_fdf.h"
 
-int	check_if_jump(char *line)
+void	handle_jump_line(char **char_matrix, char *line, t_fdf *fdf, int *to_return)
 {
-	int	i;
-
-	i = 0;
-	while (line[i] != 0)
+	if (char_matrix[wordcount(line, ' ') - 1][0] == '\n')
 	{
-		if (line[i] == '\n')
-			return (1);
-		i++;
+		fdf->width = wordcount(line, ' ') - 1;
+		to_return = malloc(sizeof(int) * wordcount(line, ' ') - 1);
+		char_matrix[wordcount(line, ' ') - 1] = 0;
 	}
-	return (0);
+	else
+	{
+		to_return = (int *) malloc(sizeof(int) * wordcount(line, ' '));
+		fdf->width = wordcount(line, ' ');
+	}
 }
 
-char	*no_jump_line(char *line)
+int	get_int_to_return(char *char_matrix)
 {
-	char	*new_line;
-	int		i;
+	char	*line_aux;
+	int		to_return;
 
-	new_line = (char *) malloc(sizeof(char) * ft_strlen(line));
-	if (!new_line)
-		return (0);
-	i = 0;
-	while (line[i] != '\n')
+
+	if (check_if_jump(char_matrix) == 0)
+		to_return = ft_atoi(char_matrix);
+	else
 	{
-		new_line[i] = line[i];
-		i++;
+		line_aux = no_jump_line(char_matrix);
+		to_return = ft_atoi(line_aux);
+		free(line_aux);
 	}
-	new_line[i] = 0;
-	return (new_line);
+	return (to_return);
 }
 
 int	*to_int_matrix(char *line, t_fdf *fdf)
 {
 	char	**char_matrix;
 	int		*to_return;
-	char	*line_aux;
 	int		i;
 
 	i = 0;
@@ -70,26 +69,11 @@ int	*to_int_matrix(char *line, t_fdf *fdf)
 		return (0);
 	while (char_matrix[i] != 0)
 	{
-		if (check_if_jump(char_matrix[i]) == 0)
-			to_return[i] = ft_atoi(char_matrix[i]);
-		else
-		{
-			if (char_matrix[i][0] != '\n')
-			{
-				line_aux = no_jump_line(char_matrix[i]);
-				to_return[i] = ft_atoi(line_aux);
-				free(line_aux);
-			}
-		}
+		if (check_if_jump(char_matrix[i]) == 0 || char_matrix[i][0] != '\n')
+			to_return[i] = get_int_to_return(char_matrix[i]);
 		i++;
 	}
-	i = 0;
-	while (char_matrix[i] != 0)
-	{
-		free(char_matrix[i]);
-		i++;
-	}
-	free(char_matrix);
+	free_aux(char_matrix);
 	return (to_return);
 }
 

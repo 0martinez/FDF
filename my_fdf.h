@@ -96,21 +96,28 @@ void			get_int_matrix(t_fdf *fdf, int i, int *error);
 void			get_color_matrix(t_fdf *fdf);
 
 int				deal_key(int key, t_fdf *fdf);
+int				mouse_hook(int key, int x, int y, t_fdf *fdf);
 void			handle_moves(int key, t_fdf *fdf);
 void			handle_zoom(int key, t_fdf *fdf);
 void			handle_perspective(int key, t_fdf *fdf);
 void			handle_palette(int key, t_fdf *fdf);
-void			handle_rotation(int key, t_fdf *fdf);
 void			handle_key_rotation(t_fdf *fdf, int key);
 
 void			draw_map(t_fdf *fdf);
 
 void			print_controls(t_fdf *fdf);
 void			draw_map(t_fdf *fdf);
+void			draw_map_process(t_fdf *fdf);
 
 void			rotate_x_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 void			rotate_y_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 void			rotate_z_exe(t_axes *first, t_axes *second, t_fdf *fdf);
+
+int				check_if_jump(char *line);
+char			*no_jump_line(char *line);
+void			free_aux(char *char_matrix);
+
+t_fdf			*to_be_free(t_fdf *fdf);
 
 void			leaks(void);
 

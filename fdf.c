@@ -12,31 +12,6 @@
 
 #include "my_fdf.h"
 
-int	mouse_hook(int key, int x, int y, t_fdf *fdf)
-{
-	if (key == 4)
-	{
-		if ((fdf->z_escalar * 1.2) < 250)
-			fdf->z_escalar *= 1.2;
-	}
-	if (key == 5)
-	{
-		if ((fdf->z_escalar * 0.8) > 0.001)
-			fdf->z_escalar *= 0.8;
-
-	}
-	x = 0;
-	y = 0;
-	fdf->img_ptr = mlx_new_image(fdf->mlx_ptr, 1950, 1080);
-		fdf->img_addr = mlx_get_data_addr(fdf->img_ptr, &fdf->bits_per_pixel,
-			&fdf->line_length, &fdf->endian);
-	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
-	draw_map(fdf);
-	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img_ptr, 0, 0);
-	print_controls(fdf);
-	return (0);
-}
-
 struct s_fdf	*init_struct(void)
 {
 	t_fdf	*fdf;

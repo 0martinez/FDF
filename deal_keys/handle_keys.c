@@ -61,17 +61,3 @@ void	handle_palette(int key, t_fdf *fdf)
 			fdf->palette = 0;
 	}
 }
-
-void	handle_rotation(int key, t_fdf *fdf)
-{
-	if (key == 7)
-	{
-		fdf->rotation = ON;
-		fdf->angle += 0.05;
-	}
-	if (key == 6)
-	{
-		fdf->rotation = ON;
-		fdf->angle -= 0.05;
-	}
-}
