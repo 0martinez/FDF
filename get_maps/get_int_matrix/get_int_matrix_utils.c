@@ -34,7 +34,7 @@ char	*no_jump_line(char *line)
 	return (new_line);
 }
 
-void	free_aux(char *char_matrix)
+void	free_aux(char **char_matrix)
 {
 	int	i;
 

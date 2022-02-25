@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/24 19:58:34 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:52:14 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void			rotate_z_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 
 int				check_if_jump(char *line);
 char			*no_jump_line(char *line);
-void			free_aux(char *char_matrix);
+void			free_aux(char **char_matrix);
 
 void			isometric(int z, t_fdf *fdf, t_axes *axe);
 void			apply_perspecive(t_fdf *fdf, t_axes *first, t_axes *second);
@@ -124,6 +124,7 @@ int				apply_palette(float y, float x, t_fdf *fdf);
 void			apply_rotation(t_axes *first, t_axes *second, t_fdf *fdf);
 void			apply_zoom(t_axes *first, t_axes *second, t_fdf *fdf);
 void			my_mlx_pixel_put(t_fdf *fdf, float x, float y, int color);
+void			move_map(t_axes *first, t_axes *second, t_fdf *fdf);
 
 t_fdf			*to_be_free(t_fdf *fdf);
 
