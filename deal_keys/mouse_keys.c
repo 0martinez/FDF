@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 17:45:21 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/25 17:45:43 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:38:52 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_z_scalar(int key, t_fdf *fdf)
 {
 	if (key == 4)
 	{
-		if ((fdf->z_escalar * 1.2) < 250)
+		if ((fdf->z_escalar * 1.2) < 200)
 			fdf->z_escalar *= 1.2;
 	}
 	if (key == 5)

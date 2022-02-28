@@ -6,23 +6,23 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:02:07 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/25 18:42:30 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:59:29 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../my_fdf.h"
 
-int	get_int_to_return(char *char_matrix)
+int	get_int_to_return(char *char_matrix, int *error)
 {
 	char	*line_aux;
 	int		to_return;
 
 	if (check_if_jump(char_matrix) == 0)
-		to_return = ft_atoi(char_matrix);
+		to_return = ft_atoi(char_matrix, error);
 	else
 	{
 		line_aux = no_jump_line(char_matrix);
-		to_return = ft_atoi(line_aux);
+		to_return = ft_atoi(line_aux, error);
 		free(line_aux);
 	}
 	return (to_return);
@@ -67,7 +67,7 @@ int	*to_int_matrix(char *line, t_fdf *fdf, int *error)
 	while (char_matrix[i] != 0)
 	{
 		if (check_if_jump(char_matrix[i]) == 0 || char_matrix[i][0] != '\n')
-			to_return[i] = get_int_to_return(char_matrix[i]);
+			to_return[i] = get_int_to_return(char_matrix[i], error);
 		i++;
 	}
 	free_aux(char_matrix);
@@ -98,7 +98,7 @@ void	get_int_matrix(t_fdf *fdf, int i, int *error)
 	if (!fdf->int_matrix)
 		return ;
 	fdf->int_matrix[j - 1] = to_int_matrix(fdf->char_matrix[j - 1], fdf, error);
-	if (!fdf->int_matrix[j - 1])
+	if (!fdf->int_matrix[j - 1] || *error != 0)
 	{
 		free(fdf->int_matrix);
 		*error = MAP_ERROR;

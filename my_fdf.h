@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/25 18:44:36 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/28 13:50:25 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define MAP_ERROR 1
 # define COLOR_ERROR 1
 # define EMPTY_LINE 2
+# define ERROR_COLOR 3
+# define ATOI_ERROR 3
 
 typedef struct s_axes
 {
@@ -82,21 +84,19 @@ size_t			wordcount(char const *s, char c);
 
 void			print_bresenham(t_axes first, t_axes second, t_fdf *fdf);
 
-int				get_color(int j, int i, t_fdf *fdf);
+int				get_color(int j, int i, t_fdf *fdf, int *error);
 
 int				**rotate_matrix__90(t_fdf *fdf);
 
-int				hex_to_dec(char *str);
-
-int				ft_atoi(const char *str);
+int				ft_atoi(const char *str, int *error);
 
 void			get_maps(t_fdf *fdf, char *str);
 void			get_char_matrix(t_fdf *fdf, char *str, int *i);
 void			get_int_matrix(t_fdf *fdf, int i, int *error);
-void			get_color_matrix(t_fdf *fdf);
+void			get_color_matrix(t_fdf *fdf, int *error);
 
 int				check_color_error(char c);
-int				hex_to_dec(char *str);
+int				hex_to_dec(char *str, int *error);
 
 int				deal_key(int key, t_fdf *fdf);
 int				mouse_hook(int key, int x, int y, t_fdf *fdf);

@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:03:11 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/25 17:52:20 by omartine         ###   ########.fr       */
+/*   Updated: 2022/02/28 13:53:23 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,15 @@ void	handle_map_error(t_fdf *fdf, int flg, int error)
 	{
 		write(1, "MAP ERROR...\n", 13);
 		write(1, "EXIT SUCCES\n", 12);
-		atexit(leaks);
 		exit (0);
 	}
 	if (flg != 0 && error != 0)
 	{
-		if (error == MAP_ERROR || error == EMPTY_LINE)
+		if (error == MAP_ERROR || error == EMPTY_LINE || error == ERROR_COLOR)
 		{
 			if (error == EMPTY_LINE)
 				free_int_matrix(fdf);
 			write(1, "MAP ERROR", 9);
-			atexit(leaks);
 			exit (0);
 		}
 	}
@@ -77,7 +75,7 @@ void	get_maps(t_fdf *fdf, char *str)
 	get_int_matrix(fdf, i, &error);
 	handle_map_error(fdf, 2, error);
 	write(1, "READING MAP...\n", 15);
-	get_color_matrix(fdf);
+	get_color_matrix(fdf, &error);
 	handle_map_error(fdf, 3, error);
 	write(1, "--PRINTING MAP--\n", 17);
 }
