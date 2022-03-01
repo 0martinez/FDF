@@ -6,13 +6,13 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:52:16 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/01 13:16:43 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:48:10 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../my_fdf.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, int *error)
 {
 	int	simb;
 	int	num;
@@ -34,7 +34,7 @@ int	ft_atoi(const char *str)
 	}
 	if (str[i] != 0 && str[i] != ',')
 	{
-		//*error = ATOI_ERROR;
+		*error = ATOI_ERROR;
 		return (0);
 	}
 	return (simb * num);

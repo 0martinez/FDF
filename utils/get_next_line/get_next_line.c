@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:52:02 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/02 13:55:45 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:26:46 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ char	*get_next_line(int fd)
 	char		*str;
 	static char	*container;
 
-	str = malloc(sizeof(char) * 1 + 1);
+	str = malloc(sizeof(char) * 1000 + 1);
 	if (!container)
-		container = malloc(sizeof(char) * 1 + 1);
+		container = malloc(sizeof(char) * 1000 + 1);
 	if (!str || !container)
 		return (0);
 	while (check_container(container) == 0)
 	{
-		bites = read(fd, str, 1);
+		bites = read(fd, str, 1000);
 		if (bites <= 0)
 			break ;
 		str[bites] = 0;

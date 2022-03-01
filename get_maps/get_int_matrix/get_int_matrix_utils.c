@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:35:43 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/01 13:35:28 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:42:22 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,27 @@ void	free_aux(char **char_matrix)
 		i++;
 	}
 	free(char_matrix);
+}
+
+int	*handle_error_int(t_fdf *fdf, char **char_matrix, int *error)
+{
+	if (fdf->width == 0)
+	{
+		free_aux(char_matrix);
+		*error = MAP_ERROR;
+	}
+	return (0);
+}
+
+void	init_int_matrix(t_fdf *fdf, int *error, int i)
+{
+	fdf->int_matrix = (int **) malloc(sizeof(int *) * (i + 1));
+	if (!fdf->int_matrix)
+		return ;
+	fdf->int_matrix[0] = to_int_matrix(fdf->char_matrix[0], fdf, error);
+	if (!fdf->int_matrix[0] || *error != 0)
+	{
+		free(fdf->int_matrix);
+		*error = MAP_ERROR;
+	}
 }

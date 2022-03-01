@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/01 13:16:31 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:48:23 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int				get_color(int j, int i, t_fdf *fdf, int *error);
 
 int				**rotate_matrix__90(t_fdf *fdf);
 
-int				ft_atoi(const char *str);
+int				ft_atoi(const char *str, int *error);
 
 void			get_maps(t_fdf *fdf, char *str);
 void			get_char_matrix(t_fdf *fdf, char *str, int *i);
@@ -117,6 +117,9 @@ void			rotate_y_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 void			rotate_z_exe(t_axes *first, t_axes *second, t_fdf *fdf);
 
 int				check_if_jump(char *line);
+int				*to_int_matrix(char *line, t_fdf *fdf, int *error);
+void			init_int_matrix(t_fdf *fdf, int *error, int i);
+int				*handle_error_int(t_fdf *fdf, char **char_matrix, int *error);
 char			*no_jump_line(char *line);
 void			free_aux(char **char_matrix);
 void			handle_jump_line(char **char_matrix, char *line,
