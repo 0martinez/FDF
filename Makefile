@@ -6,7 +6,7 @@
 #    By: omartine <omartine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 13:26:33 by omartine          #+#    #+#              #
-#    Updated: 2022/02/25 18:43:28 by omartine         ###   ########.fr        #
+#    Updated: 2022/03/01 13:17:43 by omartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SRCS =		main.c utils/get_next_line/get_next_line.c utils/get_next_line/get_next_
 			get_maps/get_char_matrix.c get_maps/get_int_matrix/get_int_matrix.c \
 			get_maps/get_int_matrix/get_int_matrix_utils.c get_maps/get_maps.c \
 			get_maps/get_color.c get_maps/get_color_utils.c deal_keys/keys_management.c \
-			get_maps/get_int_matrix/i_hate_norminette.c \
 			deal_keys/handle_keys.c deal_keys/mouse_keys.c deal_keys/handle_keys_rotation.c \
 			print_on_screen/controls_and_matrix.c draw_map/draw_map_utils/rotate/rotation.c \
 			utils/to_be_free.c

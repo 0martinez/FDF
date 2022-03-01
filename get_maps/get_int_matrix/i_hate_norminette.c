@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:40:45 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/25 18:41:55 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:12:06 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int	*get_return_value(char *line, char **char_matrix)
 {
 	int	*to_return;
 
+	write(1, "5\n", 2);
+	getchar();
 	if (char_matrix[wordcount(line, ' ') - 1][0] == '\n')
-		to_return = malloc(sizeof(int) * wordcount(line, ' ') - 1);
+		to_return = (int *) malloc(sizeof(int) * wordcount(line, ' ') - 1);
 	else
 		to_return = (int *) malloc(sizeof(int) * wordcount(line, ' '));
 	return (to_return);
