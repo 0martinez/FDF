@@ -6,7 +6,7 @@
 #    By: omartine <omartine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 13:26:33 by omartine          #+#    #+#              #
-#    Updated: 2022/03/01 13:17:43 by omartine         ###   ########.fr        #
+#    Updated: 2022/03/04 12:47:24 by omartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ RM			= rm -rf
 INC			= -I includes/ -Imlx
 
 %.o: %.c
-	cc $(FLAGS) $(INC) -o $@ -c $?
+	gcc $(FLAGS) $(INC) -o $@ -c $?
 
 all:	$(NAME)
 

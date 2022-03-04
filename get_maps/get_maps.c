@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:03:11 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/28 13:53:23 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:07:15 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	handle_map_error(t_fdf *fdf, int flg, int error)
 	{
 		write(1, "MAP ERROR...\n", 13);
 		write(1, "EXIT SUCCES\n", 12);
+		atexit(leaks);
 		exit (0);
 	}
 	if (flg != 0 && error != 0)
@@ -56,8 +57,21 @@ void	handle_map_error(t_fdf *fdf, int flg, int error)
 			if (error == EMPTY_LINE)
 				free_int_matrix(fdf);
 			write(1, "MAP ERROR", 9);
+			atexit(leaks);
 			exit (0);
 		}
+	}
+}
+
+void	print_char_matrix(t_fdf *fdf)
+{
+	int	j;
+
+	j = 0;
+	while (fdf->char_matrix[j])
+	{
+		printf("aaa%saaa", fdf->char_matrix[j]);
+		j++;
 	}
 }
 

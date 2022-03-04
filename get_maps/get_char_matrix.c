@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:59:41 by omartine          #+#    #+#             */
-/*   Updated: 2022/02/25 13:30:26 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:02:43 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,39 @@ char	**matrix_splited(char *line, char **char_matrix)
 	return (new_matrix);
 }
 
+int	check_if_jump_alone(char *str)
+{
+	int	jump;
+
+	jump = new_strlen(str);
+	if (str[jump - 1] == ' ')
+		return (1);
+	return (0);
+}
+
+char	*new_line_value(char *str)
+{
+	int		jump;
+	int		i;
+	char	*new_line;
+
+	jump = new_strlen(str);
+	i = 0;
+	while (str[jump] == ' ' || str[jump] == '\n')
+		jump--;
+	new_line = (char *) malloc(sizeof(char) * jump + 2);
+	if (!new_line)
+		return (0);
+	new_line[jump + 1] = 0;
+	while (i <= jump)
+	{
+		new_line[i] = str[i];
+		i++;
+	}
+	free(str);
+	return (new_line);
+}
+
 void	get_char_matrix(t_fdf *fdf, char *str, int *i)
 {
 	int		fd;
@@ -92,6 +125,8 @@ void	get_char_matrix(t_fdf *fdf, char *str, int *i)
 		return ;
 	while (line != 0)
 	{
+		if (check_if_jump_alone(line) == 1)
+			line = new_line_value(line);
 		fdf->char_matrix = matrix_splited(line, fdf->char_matrix);
 		fdf->height++;
 		if (!fdf->char_matrix)

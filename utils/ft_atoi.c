@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:52:16 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/01 19:48:10 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:16:40 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str, int *error)
 {
-	int	simb;
-	int	num;
-	int	i;
+	int		simb;
+	long	num;
+	int		i;
 
 	i = 0;
 	num = 0;
@@ -32,7 +32,7 @@ int	ft_atoi(const char *str, int *error)
 		num = (num * 10) + (str[i] - '0');
 		i++;
 	}
-	if (str[i] != 0 && str[i] != ',')
+	if ((str[i] != 0 && str[i] != ',') || num * simb > 2147483647 || num * simb < -2147483648)
 	{
 		*error = ATOI_ERROR;
 		return (0);
