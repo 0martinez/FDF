@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:38:31 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/01 19:48:23 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:08:17 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define COLOR_ERROR 1
 # define EMPTY_LINE 2
 # define ERROR_COLOR 3
-# define ATOI_ERROR 3
+# define ATOI_ERROR 4
 
 typedef struct s_axes
 {
@@ -128,6 +128,8 @@ void			handle_error(t_fdf *fdf, int aux_width, int *error, int j);
 void			check_error_int(t_fdf *fdf, int *error, int aux_width, int j);
 int				*get_return_value(char *line, char **char_matrix);
 t_fdf			*handle_diferent_length(t_fdf *fdf, int j);
+int				check_if_jump_alone(char *str);
+char			*new_line_value(char *str);
 
 void			isometric(int z, t_fdf *fdf, t_axes *axe);
 void			apply_perspecive(t_fdf *fdf, t_axes *first, t_axes *second);

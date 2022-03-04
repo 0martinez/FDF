@@ -6,7 +6,7 @@
 #    By: omartine <omartine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 13:26:33 by omartine          #+#    #+#              #
-#    Updated: 2022/03/04 12:47:24 by omartine         ###   ########.fr        #
+#    Updated: 2022/03/04 15:25:11 by omartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS =		main.c utils/get_next_line/get_next_line.c utils/get_next_line/get_next_
 			draw_map/draw_map_utils/bresenham.c draw_map/draw_map_utils/color_palette.c \
 			draw_map/draw_map_utils/move_map.c draw_map/draw_map_utils/my_put_pixel.c \
 			draw_map/draw_map_utils/perspective.c draw_map/draw_map_utils/rotate/rotate_map.c \
-			get_maps/get_char_matrix.c get_maps/get_int_matrix/get_int_matrix.c \
+			get_maps/get_char_matrix/get_char_matrix.c get_maps/get_char_matrix/get_char_matrix_utils.c \
+			get_maps/get_int_matrix/get_int_matrix.c \
 			get_maps/get_int_matrix/get_int_matrix_utils.c get_maps/get_maps.c \
 			get_maps/get_color.c get_maps/get_color_utils.c deal_keys/keys_management.c \
 			deal_keys/handle_keys.c deal_keys/mouse_keys.c deal_keys/handle_keys_rotation.c \

@@ -6,21 +6,11 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:59:41 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/04 14:02:43 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/04 15:26:22 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../my_fdf.h"
-
-int	new_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != 0 && str[i] != '\n')
-		i++;
-	return (i);
-}
+#include "../../my_fdf.h"
 
 char	*copy_lane(char *line)
 {
@@ -77,39 +67,6 @@ char	**matrix_splited(char *line, char **char_matrix)
 	new_matrix[i] = copy_lane(line);
 	char_matrix = free_split(char_matrix, i);
 	return (new_matrix);
-}
-
-int	check_if_jump_alone(char *str)
-{
-	int	jump;
-
-	jump = new_strlen(str);
-	if (str[jump - 1] == ' ')
-		return (1);
-	return (0);
-}
-
-char	*new_line_value(char *str)
-{
-	int		jump;
-	int		i;
-	char	*new_line;
-
-	jump = new_strlen(str);
-	i = 0;
-	while (str[jump] == ' ' || str[jump] == '\n')
-		jump--;
-	new_line = (char *) malloc(sizeof(char) * jump + 2);
-	if (!new_line)
-		return (0);
-	new_line[jump + 1] = 0;
-	while (i <= jump)
-	{
-		new_line[i] = str[i];
-		i++;
-	}
-	free(str);
-	return (new_line);
 }
 
 void	get_char_matrix(t_fdf *fdf, char *str, int *i)

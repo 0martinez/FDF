@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:35:43 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/01 19:42:22 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:52:26 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void	init_int_matrix(t_fdf *fdf, int *error, int i)
 	fdf->int_matrix[0] = to_int_matrix(fdf->char_matrix[0], fdf, error);
 	if (!fdf->int_matrix[0] || *error != 0)
 	{
-		free(fdf->int_matrix);
-		*error = MAP_ERROR;
+		if (*error == 0)
+			*error = MAP_ERROR;
+		if (*error == ATOI_ERROR)
+			*error = 5;
 	}
 }

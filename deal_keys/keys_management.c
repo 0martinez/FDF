@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:00:54 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/04 12:47:05 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/04 17:56:35 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	deal_key(int key, t_fdf *fdf)
 	{
 		fdf = to_be_free(fdf);
 		write(1, "EXIT SUCCES!\n", 13);
-		atexit(leaks);
 		exit (0);
 	}
 	draw_map_process(fdf);

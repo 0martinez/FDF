@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:02:07 by omartine          #+#    #+#             */
-/*   Updated: 2022/03/01 19:51:26 by omartine         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:36:39 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ void	get_int_matrix(t_fdf *fdf, int i, int *error)
 			return ;
 		if (aux_width != fdf->width)
 		{
-			*error = MAP_ERROR;
+			if (*error == 0)
+				*error = MAP_ERROR;
 			return ;
 		}
 		j++;
