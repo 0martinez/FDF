@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_management.c                                  :+:      :+:    :+:   */
+/*   my_put_pixel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 13:00:54 by omartine          #+#    #+#             */
-/*   Updated: 2022/04/07 17:16:17 by omartine         ###   ########.fr       */
+/*   Created: 2022/02/25 17:41:02 by omartine          #+#    #+#             */
+/*   Updated: 2022/02/25 17:41:27 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../my_fdf.h"
+#include "../../my_fdf.h"
 
-int	deal_key(int key, t_fdf *fdf)
+void	my_mlx_pixel_put(t_fdf *fdf, float x, float y, int color)
 {
-	if (key == 53)
-	{
-		fdf = to_be_free(fdf);
-		write(1, "EXIT SUCCES!\n", 13);
-		exit (0);
-	}
-	return (0);
+	char	*dst;
+
+	dst = fdf->img_addr + ((int)y * fdf->line_length
+			+ (int)x * (fdf->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

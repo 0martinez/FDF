@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_management.c                                  :+:      :+:    :+:   */
+/*   zoom.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 13:00:54 by omartine          #+#    #+#             */
-/*   Updated: 2022/04/07 17:16:17 by omartine         ###   ########.fr       */
+/*   Created: 2022/02/25 12:50:26 by omartine          #+#    #+#             */
+/*   Updated: 2022/02/25 12:50:31 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../my_fdf.h"
+#include "../../my_fdf.h"
 
-int	deal_key(int key, t_fdf *fdf)
+void	apply_zoom(t_axes *first, t_axes *second, t_fdf *fdf)
 {
-	if (key == 53)
-	{
-		fdf = to_be_free(fdf);
-		write(1, "EXIT SUCCES!\n", 13);
-		exit (0);
-	}
-	return (0);
+	first->x *= fdf->zoom;
+	first->y *= fdf->zoom;
+	second->x *= fdf->zoom;
+	second->y *= fdf->zoom;
 }

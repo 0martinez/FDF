@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_management.c                                  :+:      :+:    :+:   */
+/*   rotate_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 13:00:54 by omartine          #+#    #+#             */
-/*   Updated: 2022/04/07 17:16:17 by omartine         ###   ########.fr       */
+/*   Created: 2022/02/25 17:42:18 by omartine          #+#    #+#             */
+/*   Updated: 2022/02/25 17:42:21 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../my_fdf.h"
+#include "../../../my_fdf.h"
 
-int	deal_key(int key, t_fdf *fdf)
+void	apply_rotation(t_axes *first, t_axes *second, t_fdf *fdf)
 {
-	if (key == 53)
-	{
-		fdf = to_be_free(fdf);
-		write(1, "EXIT SUCCES!\n", 13);
-		exit (0);
-	}
-	return (0);
+	rotate_x_exe(first, second, fdf);
+	rotate_y_exe(first, second, fdf);
+	rotate_z_exe(first, second, fdf);
 }

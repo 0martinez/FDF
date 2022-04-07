@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_management.c                                  :+:      :+:    :+:   */
+/*   handle_keys_rotation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 13:00:54 by omartine          #+#    #+#             */
-/*   Updated: 2022/04/07 17:16:17 by omartine         ###   ########.fr       */
+/*   Created: 2022/02/24 12:58:17 by omartine          #+#    #+#             */
+/*   Updated: 2022/02/24 13:03:28 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../my_fdf.h"
 
-int	deal_key(int key, t_fdf *fdf)
+void	handle_key_rotation(t_fdf *fdf, int key)
 {
-	if (key == 53)
-	{
-		fdf = to_be_free(fdf);
-		write(1, "EXIT SUCCES!\n", 13);
-		exit (0);
-	}
-	return (0);
+	if (key == 0)
+		fdf->x_rot -= 0.05;
+	if (key == 1)
+		fdf->x_rot += 0.05;
+	if (key == 6)
+		fdf->y_rot += 0.05;
+	if (key == 7)
+		fdf->y_rot -= 0.05;
+	if (key == 12)
+		fdf->z_rot += 0.05;
+	if (key == 13)
+		fdf->z_rot -= 0.05;
 }

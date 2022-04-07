@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_management.c                                  :+:      :+:    :+:   */
+/*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 13:00:54 by omartine          #+#    #+#             */
-/*   Updated: 2022/04/07 17:16:17 by omartine         ###   ########.fr       */
+/*   Created: 2022/02/25 17:41:53 by omartine          #+#    #+#             */
+/*   Updated: 2022/02/25 17:41:58 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../my_fdf.h"
+#include "../../my_fdf.h"
 
-int	deal_key(int key, t_fdf *fdf)
+float	mod(float i)
 {
-	if (key == 53)
-	{
-		fdf = to_be_free(fdf);
-		write(1, "EXIT SUCCES!\n", 13);
-		exit (0);
-	}
-	return (0);
+	if (i < 0)
+		return (-i);
+	return (i);
+}
+
+int	maxx(float x, float y)
+{
+	if (x > y)
+		return (x);
+	return (y);
+}
+
+void	bresenham(t_axes first, t_axes second, t_aux *src)
+{
+	src->x_step = second.x - first.x;
+	src->y_step = second.y - first.y;
+	src->max = maxx(mod(src->x_step), mod(src->y_step));
+	src->x_step /= src->max;
+	src->y_step /= src->max;
 }
