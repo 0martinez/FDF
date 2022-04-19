@@ -6,7 +6,7 @@
 /*   By: omartine <omartine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:08:26 by omartine          #+#    #+#             */
-/*   Updated: 2022/04/07 18:28:51 by omartine         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:45:21 by omartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ struct s_fdf	*init_struct(void)
 	fdf->move_x = 500;
 	fdf->move_y = 200;
 	fdf->perspective = 0;
-
 	fdf->angle = 1;
 	fdf->rotation = 0;
 	fdf->x_rot = 0;
